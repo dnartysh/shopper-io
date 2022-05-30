@@ -1,0 +1,213 @@
+@charset "utf-8";
+@import url(http://weloveiconfonts.com/api/?family=fontawesome);
+@import url(http://meyerweb.com/eric/tools/css/reset/reset.css);
+
+[class*="fontawesome-"]:before {
+    font-family: 'FontAwesome', sans-serif;
+}
+
+body {
+    color: #000;
+    font-family: "Inter Semi Bold", Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    line-height: 2em;
+}
+
+input {
+    border: none;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    -webkit-appearance: none;
+}
+
+#login {
+    margin: 120px auto;
+    width: 400px;
+}
+
+#login h2 {
+    background-color: #fccd36;
+    -webkit-border-radius: 20px 20px 0 0;
+    -moz-border-radius: 20px 20px 0 0;
+    border-radius: 20px 20px 0 0;
+    color: #0a0a0b;
+    font-size: 28px;
+    padding: 20px 26px;
+}
+
+#login h2 span[class*="fontawesome-"] {
+    margin-right: 14px;
+}
+
+#login fieldset {
+    background-color: #fff;
+    -webkit-border-radius: 0 0 20px 20px;
+    -moz-border-radius: 0 0 20px 20px;
+    border-radius: 0 0 20px 20px;
+    padding: 20px 26px;
+}
+
+#login fieldset p {
+    color: #0a0a0b;
+    margin-bottom: 14px;
+}
+
+#login fieldset p:last-child {
+    margin-bottom: 0;
+}
+
+#login fieldset input {
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+
+#login fieldset input[type="text"], #login fieldset input[type="password"] {
+    background-color: #eee;
+    color: #0a0a0b;
+    padding: 4px 10px;
+    width: 328px;
+    text-align: center;
+}
+
+#login fieldset input[type="submit"] {
+    background-color: #fccd36;
+    color: #0a0a0b;
+    display: block;
+    margin: 0 auto;
+    padding: 4px 0;
+    width: 140px;
+    cursor: pointer;
+}
+
+#login fieldset input[type="submit"]:hover {
+    background-color: #fccd36;
+}
+
+#login input[type="submit"] {
+    background-color: #fccd36;
+    color: #0a0a0b;
+    display: block;
+    margin: 6px auto;
+    padding: 4px 4px;
+    width: 25em;
+    height: 2.6em;
+    cursor: pointer;
+    border-radius: 14px;
+}
+
+#login {
+    background-color: #ffffff;
+    -webkit-border-radius: 0 0 20px 20px;
+    -moz-border-radius: 0 0 20px 20px;
+    border-radius: 20px 20px 20px 20px;
+    box-shadow: 1px 20px 40px #777;
+}
+
+@-webkit-keyframes slideOut {
+    0% {
+        top: -30px;
+        opacity: 0;
+    }
+    100% {
+        top: 0px;
+        opacity: 1;
+    }
+}
+
+header {
+    font-size: 17px;
+    display: flex;
+    justify-content: space-between;
+    max-width: 100%;
+    min-height: 25%;
+    max-height: 25%;
+    align-items: center;
+    background: #fccd36;
+    box-shadow: 0 1px 10px rgba(0, 0, 0, .15);
+}
+
+header img {
+	position: static;
+    padding-top: 5px;
+    height: 107%;
+    width: 107%;
+	margin-left: 5px;
+	/*margin-top: 5px;*/
+}
+
+header ul {
+	list-style-type: none;
+	display: flex;
+	flex-flow: nowrap;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	transition: .5s;
+    max-width: 100%;
+}
+
+header ul li a {
+    color: #0a0a0b;
+    padding: 10px 20px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+ul li a:hover {
+    background: #3f4857;
+    color: #fff;
+    transition: .5s;
+    border-radius: 14px;
+}
+
+.header {
+    max-width: 10%;
+}
+
+table {
+    width: 90%;
+    margin: auto;
+    border: none;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+table thead th {
+    font-weight: bold;
+    text-align: left;
+    border: none;
+    padding: 10px 15px;
+    background: #d8d8d8;
+    font-size: 14px;
+}
+
+table thead tr th:first-child {
+    border-radius: 8px 0 0 8px;
+}
+
+table thead tr th:last-child {
+    border-radius: 0 8px 8px 0;
+}
+
+table tbody td {
+    text-align: left;
+    border: none;
+    padding: 10px 15px;
+    font-size: 14px;
+    vertical-align: top;
+}
+
+table tbody tr:nth-child(even){
+    background: #f3f3f3;
+}
+
+table tbody tr td:first-child {
+    border-radius: 8px 0 0 8px;
+}
+
+table tbody tr td:last-child {
+    border-radius: 0 8px 8px 0;
+}

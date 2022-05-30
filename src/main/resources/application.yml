@@ -9,5 +9,8 @@ spring:
       ddl-auto: validate
   flyway:
     baseline-on-migrate: true
+    user: test_user
+    password: Reds-2252!
+    schemas: shopper-io
 server:
   port: 8090
