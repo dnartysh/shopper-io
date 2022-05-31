@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
@@ -20,6 +21,9 @@ public class Storage {
 
     private String name;
     private String address;
-    private Double capacity;
     private String description;
+    private Double capacity;
+
+//    @ManyToMany(mappedBy = "id", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    private List<Product> products;
 }

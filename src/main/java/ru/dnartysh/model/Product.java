@@ -19,9 +19,7 @@ public class Product {
     private int id;
 
     private String name;
+    private Double price;
     private Double weight;
     private String description;
-
-//    @Column(name = "price_id")
-//    private int priceId;
 }
