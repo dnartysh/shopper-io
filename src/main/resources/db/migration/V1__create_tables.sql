@@ -43,6 +43,22 @@ create table storages
     description varchar(2000)
 );
 
+create table storage_products
+(
+    id int primary key not null,
+    storage_id int not null,
+    product_id int not null,
+    count int
+);
+
+create table shop_products
+(
+    id int primary key not null,
+    shop_id int not null,
+    product_id int not null,
+    count int
+);
+
 create table shops
 (
     id int primary key not null,
