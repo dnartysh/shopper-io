@@ -7,7 +7,8 @@ create table users
     lastname varchar(100) not null,
     birthdate date,
     registration_date date not null,
-    active boolean
+    active boolean,
+    position_id int not null
 );
 
 create table roles

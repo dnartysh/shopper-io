@@ -33,11 +33,11 @@ insert into shopper.shop_products (id, shop_id, product_id, count) values
 (2, 2, 4, 3);
 
 insert into shopper.users (id, login, password, firstname, lastname, birthdate,
-                           registration_date, active) values
-(1, 'deniska', '1111', 'Denis', 'Ivanov', '1993-01-01', '2022-01-01', 1),
-(2, 'mashka', '1323', 'Masha', 'Petrova', null, '2022-02-12', 1),
-(3, 'petka', '4334', 'Petya', 'Smirnov', '1995-05-09', '2021-08-22', 1),
-(4, 'vika555', '6764', 'Victoria', 'Vasileva', null, '2021-08-22', 1);
+                           registration_date, active, position_id) values
+(1, 'deniska', '1111', 'Denis', 'Ivanov', '1993-01-01', '2022-01-01', 1, 4),
+(2, 'mashka', '1323', 'Masha', 'Petrova', null, '2022-02-12', 1, 1),
+(3, 'petka', '4334', 'Petya', 'Smirnov', '1995-05-09', '2021-08-22', 1, 3),
+(4, 'vika555', '6764', 'Victoria', 'Vasileva', null, '2021-08-22', 1, 2);
 
 insert into shopper.user_roles (id, user_id, role_id) values
 (1, 1, 1),
