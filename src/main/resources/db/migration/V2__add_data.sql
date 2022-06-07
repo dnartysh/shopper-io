@@ -6,7 +6,8 @@ insert into shopper.positions (id, name) values
 (1, 'Seller'),
 (2, 'Manager'),
 (3, 'Storekeeper'),
-(4, 'Admin');
+(4, 'Admin'),
+(5, 'Newcomer');
 
 insert into shopper.shops (id, name, address, description) values
 (1, 'Velikiy shop', 'Street Pushkina, 1', 'Prihodite syuda'),
