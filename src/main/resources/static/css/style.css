@@ -1,10 +1,5 @@
 @charset "utf-8";
-@import url(http://weloveiconfonts.com/api/?family=fontawesome);
 @import url(http://meyerweb.com/eric/tools/css/reset/reset.css);
-
-[class*="fontawesome-"]:before {
-    font-family: 'FontAwesome', sans-serif;
-}
 
 body {
     color: #000;
@@ -20,101 +15,6 @@ input {
     font-weight: inherit;
     line-height: inherit;
     -webkit-appearance: none;
-}
-
-#login {
-    margin: 120px auto;
-    width: 400px;
-}
-
-#login h2 {
-    background-color: #fccd36;
-    -webkit-border-radius: 20px 20px 0 0;
-    -moz-border-radius: 20px 20px 0 0;
-    border-radius: 20px 20px 0 0;
-    color: #0a0a0b;
-    font-size: 28px;
-    padding: 20px 26px;
-}
-
-#login h2 span[class*="fontawesome-"] {
-    margin-right: 14px;
-}
-
-#login fieldset {
-    background-color: #fff;
-    -webkit-border-radius: 0 0 20px 20px;
-    -moz-border-radius: 0 0 20px 20px;
-    border-radius: 0 0 20px 20px;
-    padding: 20px 26px;
-}
-
-#login fieldset p {
-    color: #0a0a0b;
-    margin-bottom: 14px;
-}
-
-#login fieldset p:last-child {
-    margin-bottom: 0;
-}
-
-#login fieldset input {
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    border-radius: 3px;
-}
-
-#login fieldset input[type="text"], #login fieldset input[type="password"] {
-    background-color: #eee;
-    color: #0a0a0b;
-    padding: 4px 10px;
-    width: 328px;
-    text-align: center;
-}
-
-#login fieldset input[type="submit"] {
-    background-color: #fccd36;
-    color: #0a0a0b;
-    display: block;
-    margin: 0 auto;
-    padding: 4px 0;
-    width: 140px;
-    cursor: pointer;
-}
-
-#login fieldset input[type="submit"]:hover {
-    background-color: #fccd36;
-}
-
-#login input[type="submit"] {
-    background-color: #fccd36;
-    color: #0a0a0b;
-    display: block;
-    margin: 6px auto;
-    padding: 4px 4px;
-    width: 25em;
-    height: 2.6em;
-    cursor: pointer;
-    border-radius: 14px;
-}
-
-#login {
-    background-color: #ffffff;
-    -webkit-border-radius: 0 0 20px 20px;
-    -moz-border-radius: 0 0 20px 20px;
-    border-radius: 20px 20px 20px 20px;
-    box-shadow: 1px 20px 40px #777;
-}
-
-@-webkit-keyframes slideOut {
-    0% {
-        top: -30px;
-        opacity: 0;
-    }
-    100% {
-        top: 0px;
-        opacity: 1;
-    }
 }
 
 header {
@@ -135,7 +35,6 @@ header img {
     height: 107%;
     width: 107%;
 	margin-left: 5px;
-	/*margin-top: 5px;*/
 }
 
 header ul {
@@ -168,7 +67,8 @@ ul li a:hover {
 }
 
 table {
-    width: 90%;
+    width: 85%;
+    max-width: 100%;
     margin: auto;
     border: none;
     margin-top: 20px;
@@ -182,6 +82,18 @@ table thead th {
     padding: 10px 15px;
     background: #d8d8d8;
     font-size: 14px;
+}
+
+table caption {
+    background: #c5c8cc;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    padding: 10px;
+    box-shadow: 0 2px  4px 0 rgba(0,0,0,.3);
+    color: #3f4857;
+    font-size: 23px;
+    text-align: center;
+    margin: 0;
 }
 
 table thead tr th:first-child {
@@ -210,4 +122,171 @@ table tbody tr td:first-child {
 
 table tbody tr td:last-child {
     border-radius: 0 8px 8px 0;
+}
+
+label {
+    cursor: pointer;
+}
+
+.popup-btn {
+    position: relative;
+    display: table-cell;
+    width: 100px;
+    height: 100px;
+    background-color: #2c3e50;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.3);
+    border-radius: 50%;
+    font-size: 36px;
+    color: white;
+    text-align: center;
+    line-height: 2.75;
+    transition: box-shadow 250ms ease;
+}
+
+.popup-btn:hover {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+.popup-bg {
+    position: absolute;
+    pointer-events: none;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    z-index: 10;
+    visibility: hidden;
+    transition: background-color 250ms linear;
+}
+
+.popup-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 50%;
+    height: auto;
+    margin-top: -18%;
+    margin-left: -25%;
+    padding: 30px;
+    background-color: white;
+    border-radius: 14px;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+    transform: scale(0);
+    transition: transform 250ms ease;
+    visibility: hidden;
+    z-index: 20;
+}
+
+.popup-content .p-modal {
+    text-align: center;
+    font-size: 18px;
+}
+
+.popup-content .popup-btn-close {
+    position: relative;
+    float: right;
+    font-size: 18px;
+    transition: transform 500ms ease;
+    z-index: 11;
+}
+
+.popup-content header {
+    position: relative;
+    display: block;
+    border-bottom: 1px solid #eee;
+}
+
+.popup-content header h2 {
+    margin: 0 0 10px;
+    padding: 0;
+    font-size: 28px;
+}
+
+.popup-content article {
+    position: relative;
+    display: block;
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+    line-height: 1.75;
+}
+
+.popup-content footer {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+    margin: 0;
+    padding: 10px 0 0;
+}
+
+.popup-content footer .button {
+    position: relative;
+    padding: 10px 30px;
+    border-radius: 14px;
+    font-size: 14px;
+    font-weight: 400;
+    color: white;
+    text-transform: uppercase;
+    overflow: hidden;
+}
+
+.popup-content footer .button:before {
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    /*background-color: rgba(255, 255, 255, 0.2);*/
+    /*transition: width 250ms ease;*/
+    z-index: 0;
+}
+
+.popup-content footer .button:hover:before {
+    width: 100%;
+}
+
+.popup-content footer .button.success {
+    margin-right: 5px;
+    background-color: #fccd36;
+    color: #0a0a0b;
+    padding: 10px 20px;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 14px;
+}
+
+.popup-content footer .button.success:hover, .popup-content footer .button.close:hover {
+    background: #3f4857;
+    color: #fff;
+    transition: .5s;
+    border-radius: 14px;
+}
+
+.popup-content footer .button.close {
+    background-color: #fff;
+    color: #0a0a0b;
+    border-radius: 14px;
+    font-weight: bold;
+}
+
+#popup {
+    display: none;
+}
+
+#popup:checked ~ .popup-bg {
+    visibility: visible;
+    background-color: black;
+    opacity: 0.7;
+    transition: background-color 250ms linear;
+}
+
+#popup:checked ~ .popup-content {
+    visibility: visible;
+    transform: scale(1);
+    transition: transform 250ms ease;
+    z-index: 111;
 }

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>Shopper</title>
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Varela+Round">
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css"/>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+<body>
+<header>
+    <div class="header">
+        <a href="#"><img src="/images/logo.png"></a>
+    </div>
+    <div class="nav-menu">
+        <nav class="nav-menu">
+            <ul id="nav-list">
+                <li v-for="menu in adminMenu">
+                    <a v-bind:href="menu.url">{{menu.name}}</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <div class="menu">
+        <nav class="menu">
+            <ul>
+                <li><a href="#">{user}</a></li>
+                <li><a href="#">Выйти</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+<table class="table-user">
+    <caption>Список пользователей</caption>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Логин</th>
+        <th>Имя</th>
+        <th>Фамилия</th>
+        <th>Дата рождения</th>
+        <th>Дата регистрации</th>
+        <th>Включен</th>
+        <th>Изменить</th>
+    </tr>
+    </thead>
+    <tbody>
+    <div th:each="user : ${users}">
+        <tr>
+            <td th:text="${user.id}"></td>
+            <td th:text="${user.login}"></td>
+            <td th:text="${user.firstname}"></td>
+            <td th:text="${user.lastname}"></td>
+            <td th:text="${user.birthdate}"></td>
+            <td th:text="${user.registrationDate}"></td>
+            <td th:text="${user.active}"></td>
+            <td><a href="#" onclick="userEdit()"><label for="popup">Изменить</label></a></td>
+        </tr>
+    </div>
+    </tbody>
+</table>
+
+<input type="checkbox" id="popup"/>
+<label for="popup" class="popup-bg"></label>
+<div class="popup-content">
+    <article class="popup-header">
+        <p class="p-modal">Редактирование пользователя - {user}</p>
+    </article>
+
+    <article class="popup-body">
+        <p>Поля - {field}</p>
+    </article>
+
+    <footer>
+        <a href="#" class="button success">Сохранить</a>
+        <label for="popup" class="button close">Закрыть</label>
+    </footer>
+</div>
+
+<script src="/js/main.js"></script>
+<script src="/js/admin.js"></script>
+</body>
+</html>
