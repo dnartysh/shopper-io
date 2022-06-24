@@ -23,7 +23,7 @@ public class User {
     private int id;
 
     @NotNull
-    private String login;
+    private String username;
 
     @NotNull
     private String password;

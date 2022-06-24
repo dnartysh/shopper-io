@@ -1,8 +1,8 @@
 create table users
 (
-    id int primary key not null,
-    login varchar(40) not null,
-    password varchar(40) not null,
+    id int primary key not null auto_increment,
+    username varchar(40) not null,
+    password varchar(500) not null,
     firstname varchar(100) not null,
     lastname varchar(100) not null,
     birthdate date,
@@ -13,20 +13,20 @@ create table users
 
 create table roles
 (
-    id int primary key not null,
+    id int primary key not null auto_increment,
     name varchar(100) not null
 );
 
 create table user_roles
 (
-    id int primary key not null,
-    user_id int,
-    role_id int
+    id int primary key not null auto_increment,
+    user_id int not null,
+    role_id int not null
 );
 
 create table products
 (
-    id int primary key not null,
+    id int primary key not null auto_increment,
     name varchar(200) not null,
     price double,
     weight double,
@@ -37,7 +37,7 @@ create table products
 
 create table storages
 (
-    id int primary key not null,
+    id int primary key not null auto_increment,
     name varchar(200) not null,
     address varchar(250),
     capacity double,
@@ -46,7 +46,7 @@ create table storages
 
 create table storage_products
 (
-    id int primary key not null,
+    id int primary key not null auto_increment,
     storage_id int not null,
     product_id int not null,
     count int
@@ -54,7 +54,7 @@ create table storage_products
 
 create table shop_products
 (
-    id int primary key not null,
+    id int primary key not null auto_increment,
     shop_id int not null,
     product_id int not null,
     count int
@@ -62,7 +62,7 @@ create table shop_products
 
 create table shops
 (
-    id int primary key not null,
+    id int primary key not null auto_increment,
     name varchar(200) not null,
     address varchar(250),
     description varchar(2000)
@@ -70,13 +70,13 @@ create table shops
 
 create table positions
 (
-    id int primary key not null,
+    id int primary key not null auto_increment,
     name varchar(150) not null
 );
 
 create table user_positions
 (
-    id int primary key not null,
+    id int primary key not null auto_increment,
     user_id int,
     position_id int
 );

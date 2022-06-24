@@ -3,11 +3,11 @@ insert into shopper.roles (id, name) values
 (2, 'ROLE_USER');
 
 insert into shopper.positions (id, name) values
-(1, 'Seller'),
-(2, 'Manager'),
-(3, 'Storekeeper'),
-(4, 'Admin'),
-(5, 'Newcomer');
+(1, 'seller'),
+(2, 'manager'),
+(3, 'storekeeper'),
+(4, 'admin'),
+(5, 'newcomer');
 
 insert into shopper.shops (id, name, address, description) values
 (1, 'Velikiy shop', 'Street Pushkina, 1', 'Prihodite syuda'),
@@ -33,12 +33,12 @@ insert into shopper.shop_products (id, shop_id, product_id, count) values
 (1, 1, 3, 2),
 (2, 2, 4, 3);
 
-insert into shopper.users (id, login, password, firstname, lastname, birthdate,
+insert into shopper.users (id, username, password, firstname, lastname, birthdate,
                            registration_date, active, position_id) values
-(1, 'deniska', '1111', 'Denis', 'Ivanov', '1993-01-01', '2022-01-01', 1, 4),
-(2, 'mashka', '1323', 'Masha', 'Petrova', null, '2022-02-12', 1, 1),
-(3, 'petka', '4334', 'Petya', 'Smirnov', '1995-05-09', '2021-08-22', 1, 3),
-(4, 'vika555', '6764', 'Victoria', 'Vasileva', null, '2021-08-22', 1, 2);
+(1, 'deniska', '$2a$04$DF55XBZdXgb2b3v0hjNjRulWKSvB/9sK6qh3laDqt68e7p4X8W.sC', 'Denis', 'Ivanov', '1993-01-01', '2022-01-01', 1, 4),
+(2, 'mashka', '$2a$10$egI039xq/glHkdRIJMS4I.5NHPMZpNe3ZaOtmcwoqf1V3eWTtjycy', 'Masha', 'Petrova', null, '2022-02-12', 1, 1),
+(3, 'petka', '$2a$10$iJDels8.H06Iajy3WEUYx.Mfzb4O3SJ4hSrHai6Uoi8ZJV7IQJUC2', 'Petya', 'Smirnov', '1995-05-09', '2021-08-22', 1, 3),
+(4, 'vika555', '$2a$10$7QA8U7Fr2oZ.zGj2GdEYR.X/djyoTmKq6GDjq5rW/FHyRmr11cX4e', 'Victoria', 'Vasileva', null, '2021-08-22', 1, 2);
 
 insert into shopper.user_roles (id, user_id, role_id) values
 (1, 1, 1),

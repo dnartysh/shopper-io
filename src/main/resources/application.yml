@@ -3,6 +3,8 @@ spring:
     url: jdbc:mysql://localhost:3306/shopper
     username: test_user
     password: Reds-2252!
+  main:
+    allow-circular-references: true
   jpa:
     show-sql: false
     hibernate:
