@@ -1,10 +1,14 @@
 package ru.dnartysh.controller;
 
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import ru.dnartysh.model.User;
 import ru.dnartysh.service.UserService;
 
 
@@ -19,7 +23,14 @@ public class AppController {
 
     @GetMapping
     public String redirectToLoginPage() {
-        return "login";
+        User user = userService.findUserByUsername
+                (SecurityContextHolder.getContext().getAuthentication().getName());
+
+        if (user == null) {
+            throw new UsernameNotFoundException("User not found");
+        }
+
+        return user.getPosition().getName();
     }
 
     @GetMapping("/login")
@@ -28,8 +39,23 @@ public class AppController {
     }
 
     @PostMapping(value = "/login")
-    public String loginSuccess() {
-        return "login";
+    public String loginSuccess(Model model) {
+        User user = userService.findUserByUsername
+                (SecurityContextHolder.getContext().getAuthentication().getName());
+
+        model.addAttribute("id", user.getId());
+        model.addAttribute("username", user.getUsername());
+        model.addAttribute("firstname", user.getFirstname());
+        model.addAttribute("lastname", user.getLastname());
+        model.addAttribute("position", user.getPosition());
+        model.addAttribute("userURI", user.getPosition());
+        model.addAttribute("role", user.getRoles());
+        model.addAttribute("registrationDate", user.getRegistrationDate());
+        model.addAttribute("birthdate", user.getBirthdate());
+
+        System.out.println(user.getPosition().getName());
+
+        return user.getPosition().getName();
     }
 
     @GetMapping("/registration")
@@ -39,9 +65,9 @@ public class AppController {
 
     @PostMapping("/registration")
     public String registerUser(@RequestParam String username,
-                             @RequestParam String firstname,
-                             @RequestParam String lastname,
-                             @RequestParam String password) throws Exception {
+                               @RequestParam String firstname,
+                               @RequestParam String lastname,
+                               @RequestParam String password) throws Exception {
         userService.saveUser(username, firstname, lastname, password);
 
         return "registration";

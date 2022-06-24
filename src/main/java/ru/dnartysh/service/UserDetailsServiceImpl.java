@@ -32,6 +32,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userService.findUserByUsername(username);
+
+        if (user == null) {
+            throw new UsernameNotFoundException("User with username - " + username + " not found!");
+        }
+
         List<GrantedAuthority> authorities = getUserAuthorities(user.getRoles());
 
         return buildUserForAuthentication(user, authorities);

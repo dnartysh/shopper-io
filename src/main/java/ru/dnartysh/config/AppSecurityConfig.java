@@ -10,7 +10,6 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import ru.dnartysh.service.UserDetailsServiceImpl;
 
@@ -44,8 +43,6 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authenticated().and().csrf().disable().formLogin()
                 .loginPage("/login")
                 .loginProcessingUrl("/login")
-                .defaultSuccessUrl("/admin")
-                .successHandler(AuthenticationAppHandler())
                 .usernameParameter("username")
                 .passwordParameter("password")
                 .and().logout()
@@ -62,10 +59,5 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
-    }
-
-    @Bean
-    public AuthenticationSuccessHandler AuthenticationAppHandler(){
-        return new AppUrlAuthenticationSuccessHandler();
     }
 }
