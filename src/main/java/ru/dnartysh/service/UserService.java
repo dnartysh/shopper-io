@@ -73,11 +73,16 @@ public class UserService {
     }
 
     public void setCookie(HttpServletResponse response) {
-        Cookie cookie = new Cookie("position", getCurrentUser().getPosition().getName());
-        cookie.setHttpOnly(false);
-        cookie.setSecure(false);
+        Cookie positionCookie = new Cookie("position", getCurrentUser().getPosition().getName());
+        positionCookie.setHttpOnly(false);
+        positionCookie.setSecure(false);
 
-        response.addCookie(cookie);
+        Cookie idCookie = new Cookie("userId", String.valueOf(getCurrentUser().getId()));
+        idCookie.setHttpOnly(false);
+        idCookie.setSecure(false);
+
+        response.addCookie(positionCookie);
+        response.addCookie(idCookie);
     }
 
     public Map<String, String> getSimpleFieldsForCurrentUser() {

@@ -21,14 +21,14 @@ public class AppController {
         this.userService = userService;
     }
 
-    @GetMapping
+    @GetMapping("/")
     public String redirectToPage(Model model, HttpServletResponse response) {
         User user = userService.getCurrentUser();
         model.addAttribute("currentUser", userService.getSimpleFieldsForCurrentUser());
 
         userService.setCookie(response);
 
-        return user.getPosition().getName();
+        return "account/" + user.getPosition().getName();
     }
 
     @GetMapping("/login")
@@ -43,7 +43,7 @@ public class AppController {
 
         userService.setCookie(response);
 
-        return currentUser.getPosition().getName();
+        return "account/" + currentUser.getPosition().getName();
     }
 
     @GetMapping("/registration")

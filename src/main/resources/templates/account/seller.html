@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>Shopper</title>
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Varela+Round">
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css"/>
+    <link rel="stylesheet" href="/css/util.css" media="screen" type="text/css"/>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+<body>
+<header>
+    <div class="header">
+        <a href="/"><img src="/images/logo.png"></a>
+    </div>
+    <div class="nav-menu">
+        <nav class="nav-menu">
+            <ul id="nav-list">
+                <li v-for="menu in menus">
+                    <a v-bind:href="menu.url">{{menu.name}}</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <div class="header-menu">
+        <nav>
+            <ul>
+                <img src="/images/user/0.png" class="user-avatar-header">
+                <li><a href="/settings" th:text="${currentUser.firstname} + ' ' + ${currentUser.lastname}"></a></li>
+                <li><a href="/logout">Выйти</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<script src="/js/main.js"></script>
+</body>
+</html>

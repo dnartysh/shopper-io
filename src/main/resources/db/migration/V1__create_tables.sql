@@ -5,6 +5,7 @@ create table users
     password varchar(500) not null,
     firstname varchar(100) not null,
     lastname varchar(100) not null,
+    image_path varchar(255),
     birthdate date,
     registration_date date not null,
     active boolean,
