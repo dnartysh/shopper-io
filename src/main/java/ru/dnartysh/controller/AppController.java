@@ -1,7 +1,5 @@
 package ru.dnartysh.controller;
 
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.dnartysh.model.User;
 import ru.dnartysh.service.UserService;
+
+import javax.servlet.http.HttpServletResponse;
 
 
 @Controller
@@ -22,13 +22,11 @@ public class AppController {
     }
 
     @GetMapping
-    public String redirectToLoginPage() {
-        User user = userService.findUserByUsername
-                (SecurityContextHolder.getContext().getAuthentication().getName());
+    public String redirectToPage(Model model, HttpServletResponse response) {
+        User user = userService.getCurrentUser();
+        model.addAttribute("currentUser", userService.getSimpleFieldsForCurrentUser());
 
-        if (user == null) {
-            throw new UsernameNotFoundException("User not found");
-        }
+        userService.setCookie(response);
 
         return user.getPosition().getName();
     }
@@ -39,23 +37,13 @@ public class AppController {
     }
 
     @PostMapping(value = "/login")
-    public String loginSuccess(Model model) {
-        User user = userService.findUserByUsername
-                (SecurityContextHolder.getContext().getAuthentication().getName());
+    public String loginSuccess(Model model, HttpServletResponse response) {
+        User currentUser = userService.getCurrentUser();
+        model.addAttribute("currentUser", userService.getSimpleFieldsForCurrentUser());
 
-        model.addAttribute("id", user.getId());
-        model.addAttribute("username", user.getUsername());
-        model.addAttribute("firstname", user.getFirstname());
-        model.addAttribute("lastname", user.getLastname());
-        model.addAttribute("position", user.getPosition());
-        model.addAttribute("userURI", user.getPosition());
-        model.addAttribute("role", user.getRoles());
-        model.addAttribute("registrationDate", user.getRegistrationDate());
-        model.addAttribute("birthdate", user.getBirthdate());
+        userService.setCookie(response);
 
-        System.out.println(user.getPosition().getName());
-
-        return user.getPosition().getName();
+        return currentUser.getPosition().getName();
     }
 
     @GetMapping("/registration")
@@ -73,13 +61,10 @@ public class AppController {
         return "registration";
     }
 
-    @GetMapping("/admin")
-    public String adminPage() {
-        return "admin";
-    }
+    @GetMapping("/settings")
+    public String settingsPage(Model model, HttpServletResponse response) {
+        model.addAttribute("currentUser", userService.getSimpleFieldsForCurrentUser());
 
-    @GetMapping("/user")
-    public String userPage() {
-        return "user";
+        return "settings";
     }
 }

@@ -1,6 +1,7 @@
 package ru.dnartysh.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.dnartysh.model.Role;
@@ -9,9 +10,9 @@ import ru.dnartysh.repository.PositionRepository;
 import ru.dnartysh.repository.RoleRepository;
 import ru.dnartysh.repository.UserRepository;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+import java.util.*;
 
 @Service
 public class UserService {
@@ -64,5 +65,31 @@ public class UserService {
         userRepository.save(user);
 
         return user;
+    }
+
+    public User getCurrentUser() {
+        return userRepository.findByUsername
+                (SecurityContextHolder.getContext().getAuthentication().getName());
+    }
+
+    public void setCookie(HttpServletResponse response) {
+        Cookie cookie = new Cookie("position", getCurrentUser().getPosition().getName());
+        cookie.setHttpOnly(false);
+        cookie.setSecure(false);
+
+        response.addCookie(cookie);
+    }
+
+    public Map<String, String> getSimpleFieldsForCurrentUser() {
+        Map<String, String> fields = new HashMap<>();
+
+        User currentUser = getCurrentUser();
+
+        fields.put("id", String.valueOf(currentUser.getId()));
+        fields.put("firstname", currentUser.getFirstname());
+        fields.put("lastname", currentUser.getLastname());
+        fields.put("position", currentUser.getPosition().getName());
+
+        return fields;
     }
 }

@@ -10,55 +10,27 @@
 <body>
 <header>
     <div class="header">
-        <a href="#"><img src="/images/logo.png"></a>
+        <a href="/"><img src="/images/logo.png"></a>
     </div>
     <div class="nav-menu">
         <nav class="nav-menu">
             <ul id="nav-list">
-                <li v-for="menu in adminMenu">
+                <li v-for="menu in menus">
                     <a v-bind:href="menu.url">{{menu.name}}</a>
                 </li>
             </ul>
         </nav>
     </div>
-    <div class="menu">
-        <nav class="menu">
+    <div class="header-menu">
+        <nav>
             <ul>
-                <li><a href="#">{user}</a></li>
-                <li><a href="#">Выйти</a></li>
+                <img src="/images/user/0.jpg" class="user-avatar-header">
+                <li><a href="/settings" th:text="${currentUser.firstname} + ' ' + ${currentUser.lastname}"></a></li>
+                <li><a href="/logout">Выйти</a></li>
             </ul>
         </nav>
     </div>
 </header>
-<table class="table-user">
-    <caption>Список пользователей</caption>
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Логин</th>
-        <th>Имя</th>
-        <th>Фамилия</th>
-        <th>Дата рождения</th>
-        <th>Дата регистрации</th>
-        <th>Включен</th>
-        <th>Изменить</th>
-    </tr>
-    </thead>
-    <tbody>
-    <div th:each="user : ${users}">
-        <tr>
-            <td th:text="${user.id}"></td>
-            <td th:text="${user.login}"></td>
-            <td th:text="${user.firstname}"></td>
-            <td th:text="${user.lastname}"></td>
-            <td th:text="${user.birthdate}"></td>
-            <td th:text="${user.registrationDate}"></td>
-            <td th:text="${user.active}"></td>
-            <td><a href="#" onclick="userEdit()"><label for="popup">Изменить</label></a></td>
-        </tr>
-    </div>
-    </tbody>
-</table>
 
 <input type="checkbox" id="popup"/>
 <label for="popup" class="popup-bg"></label>
