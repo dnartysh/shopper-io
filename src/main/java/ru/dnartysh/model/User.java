@@ -34,6 +34,9 @@ public class User {
     @NotNull
     private String lastname;
 
+    @Column(name = "image_path")
+    private String imagePath;
+
     @Column(columnDefinition = "DATE")
     private Date birthdate;
 
@@ -43,12 +46,12 @@ public class User {
 
     private boolean active;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private List<Role> roles;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "position_id")
     private Position position;
 }

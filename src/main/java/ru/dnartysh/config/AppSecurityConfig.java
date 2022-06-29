@@ -17,14 +17,17 @@ import ru.dnartysh.service.UserDetailsServiceImpl;
 @EnableWebSecurity
 public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
     UserDetailsServiceImpl userDetailsService;
+
+    @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
+    LoginSuccessHandler loginSuccessHandler;
+
+    @Autowired
     @Lazy
-    public AppSecurityConfig(UserDetailsServiceImpl userDetailsService,
-                             BCryptPasswordEncoder bCryptPasswordEncoder) {
+    public AppSecurityConfig(UserDetailsServiceImpl userDetailsService) {
         this.userDetailsService = userDetailsService;
-        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
     @Override
@@ -44,6 +47,7 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authenticated().and().csrf().disable().formLogin()
                 .loginPage("/login")
                 .loginProcessingUrl("/login")
+                .successHandler(loginSuccessHandler)
                 .usernameParameter("username")
                 .passwordParameter("password")
                 .and().logout()
@@ -54,7 +58,7 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring()
-                .antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**");
+                .antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/img/**");
     }
 
     @Bean

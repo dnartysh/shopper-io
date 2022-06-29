@@ -4,14 +4,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import ru.dnartysh.model.Role;
 import ru.dnartysh.model.User;
 import ru.dnartysh.repository.PositionRepository;
 import ru.dnartysh.repository.RoleRepository;
 import ru.dnartysh.repository.UserRepository;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletResponse;
+import java.io.BufferedOutputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.*;
 
 @Service
@@ -19,17 +22,17 @@ public class UserService {
     UserRepository userRepository;
     RoleRepository roleRepository;
     PositionRepository positionRepository;
+
+    @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
-    public UserService (UserRepository userRepository,
-                        RoleRepository roleRepository,
-                        PositionRepository positionRepository,
-                        BCryptPasswordEncoder bCryptPasswordEncoder) {
+    public UserService(UserRepository userRepository,
+                       RoleRepository roleRepository,
+                       PositionRepository positionRepository) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.positionRepository = positionRepository;
-        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
     public User findUserByUsername(String username) {
@@ -72,19 +75,6 @@ public class UserService {
                 (SecurityContextHolder.getContext().getAuthentication().getName());
     }
 
-    public void setCookie(HttpServletResponse response) {
-        Cookie positionCookie = new Cookie("position", getCurrentUser().getPosition().getName());
-        positionCookie.setHttpOnly(false);
-        positionCookie.setSecure(false);
-
-        Cookie idCookie = new Cookie("userId", String.valueOf(getCurrentUser().getId()));
-        idCookie.setHttpOnly(false);
-        idCookie.setSecure(false);
-
-        response.addCookie(positionCookie);
-        response.addCookie(idCookie);
-    }
-
     public Map<String, String> getSimpleFieldsForCurrentUser() {
         Map<String, String> fields = new HashMap<>();
 
@@ -92,9 +82,29 @@ public class UserService {
 
         fields.put("id", String.valueOf(currentUser.getId()));
         fields.put("firstname", currentUser.getFirstname());
+        fields.put("imgPath", currentUser.getImagePath());
         fields.put("lastname", currentUser.getLastname());
         fields.put("position", currentUser.getPosition().getName());
 
         return fields;
+    }
+
+    public void uploadUserPhoto(MultipartFile file) throws IOException {
+        User currentUser = getCurrentUser();
+
+        if (!file.isEmpty()) {
+            String rootImgPath = "src/main/resources/static";
+            String imgName = "/img/user/" + currentUser.getId() + ".png";
+
+            byte[] bytes = file.getBytes();
+            BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(rootImgPath + imgName));
+            stream.write(bytes);
+            stream.close();
+
+            currentUser.setImagePath(imgName);
+            userRepository.save(currentUser);
+        } else {
+            throw new FileNotFoundException("File not found");
+        }
     }
 }

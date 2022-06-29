@@ -19,13 +19,13 @@ import java.util.Set;
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
     private UserService userService;
+
+    @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
-    public UserDetailsServiceImpl(UserService userService,
-                                  BCryptPasswordEncoder bCryptPasswordEncoder) {
+    public UserDetailsServiceImpl(UserService userService) {
         this.userService = userService;
-        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
     @Override

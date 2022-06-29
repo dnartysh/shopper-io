@@ -6,10 +6,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import ru.dnartysh.model.User;
 import ru.dnartysh.service.UserService;
 
-import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 
 @Controller
@@ -22,11 +23,9 @@ public class AppController {
     }
 
     @GetMapping("/")
-    public String redirectToPage(Model model, HttpServletResponse response) {
+    public String redirectToPage(Model model) {
         User user = userService.getCurrentUser();
         model.addAttribute("currentUser", userService.getSimpleFieldsForCurrentUser());
-
-        userService.setCookie(response);
 
         return "account/" + user.getPosition().getName();
     }
@@ -37,11 +36,9 @@ public class AppController {
     }
 
     @PostMapping(value = "/login")
-    public String loginSuccess(Model model, HttpServletResponse response) {
+    public String loginSuccess(Model model) {
         User currentUser = userService.getCurrentUser();
         model.addAttribute("currentUser", userService.getSimpleFieldsForCurrentUser());
-
-        userService.setCookie(response);
 
         return "account/" + currentUser.getPosition().getName();
     }
@@ -62,8 +59,18 @@ public class AppController {
     }
 
     @GetMapping("/settings")
-    public String settingsPage(Model model, HttpServletResponse response) {
+    public String settingsPage(Model model) {
         model.addAttribute("currentUser", userService.getSimpleFieldsForCurrentUser());
+
+        return "settings";
+    }
+
+    @PostMapping("/settings")
+    public String uploadPhoto(@RequestParam MultipartFile file,
+                              Model model) throws IOException {
+        model.addAttribute("currentUser", userService.getSimpleFieldsForCurrentUser());
+
+        userService.uploadUserPhoto(file);
 
         return "settings";
     }

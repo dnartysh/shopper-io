@@ -1,7 +1,7 @@
 create table users
 (
     id int primary key not null auto_increment,
-    username varchar(40) not null,
+    username varchar(50) not null,
     password varchar(500) not null,
     firstname varchar(100) not null,
     lastname varchar(100) not null,
