@@ -7,20 +7,23 @@
     <meta charset="UTF-8">
     <title>Shopper</title>
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Varela+Round">
-    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/img/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css"/>
     <link rel="stylesheet" href="/css/util.css" media="screen" type="text/css"/>
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
 </head>
 <body>
 <header>
-    <div class="header">
-        <a href="/"><img src="/images/logo.png"></a>
+    <div class="logo">
+        <a href="/"><img src="/img/logo.png"></a>
     </div>
     <div class="header-menu">
         <nav>
             <ul>
-                <img src="/images/user/0.png" class="user-avatar-header">
+                <div class="user-avatar-header" th:switch="${currentUser.imgPath}">
+                    <img th:case="''" th:src="'/img/user/user-not-found.png'">
+                    <img th:case="*" th:src="${currentUser.imgPath}">
+                </div>
                 <li><a href="/settings" th:text="${currentUser.firstname} + ' ' + ${currentUser.lastname}"></a></li>
                 <li><a href="/logout">Выйти</a></li>
             </ul>

@@ -7,15 +7,22 @@
     <meta charset="UTF-8">
     <title>Shopper</title>
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Varela+Round">
-    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/img/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
     <link rel="stylesheet" href="/css/util.css" media="screen" type="text/css">
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+    <script>
+        $(function (){
+            $("#header").load("header.html");
+        })
+    </script>
 </head>
 <body>
+<div id="header"></div>
 <header>
-    <div class="header">
-        <a href="/"><img src="/images/logo.png"></a>
+    <div class="logo">
+        <a href="/"><img src="/img/logo.png"></a>
     </div>
     <div class="nav-menu">
         <nav class="nav-menu">
@@ -29,7 +36,10 @@
     <div class="header-menu">
         <nav>
             <ul>
-                <img src="/images/user/0.png" class="user-avatar-header">
+                <div class="user-avatar-header" th:switch="${currentUser.imgPath}">
+                    <img th:case="''" th:src="'/img/user/user-not-found.png'">
+                    <img th:case="*" th:src="${currentUser.imgPath}">
+                </div>
                 <li><a href="/settings" th:text="${currentUser.firstname} + ' ' + ${currentUser.lastname}"></a></li>
                 <li><a href="/logout">Выйти</a></li>
             </ul>
@@ -39,39 +49,44 @@
 <input type="checkbox" id="popup">
 <label for="popup" class="popup-bg"></label>
 
-<div class="user-setting">
 
-    <div class="user-setting-content">
-        <div class="user-photo-content">
-            <img src="/images/user/0.png" class="user-avatar">
-            <div class="login100-form-btn m-t-10"><label for="popup">Загрузить</label></div>
+<div class="user-setting-content">
+    <div class="wrap-user-setting-content">
+        <div class="user-setting-body">
+            <div class="photo">
+                <div th:switch="${currentUser.imgPath}">
+                    <img th:case="''" th:src="'/img/user/user-not-found.png'" class="photo">
+                    <img th:case="*" th:src="${currentUser.imgPath}" class="photo">
+                </div>
+            </div>
+            <div class="info">
+                <div>
+                    <p>Фамилия: </p>
+                    <p>Имя: </p>
+                    <p>Дата рождения: </p>
+                </div>
+                <div>
+                    <input type="text" name="firstname" placeholder="Фамилия">
+                    <input type="text" name="lastname" placeholder="Имя">
+                    <input type="date" name="birthdate" placeholder="Дата рождения">
+                </div>
+            </div>
         </div>
-
-        <div class="user-info-content">
-            <div class="input-fields">
-                <span>Фамилия: </span>
-                <input type="text" name="firstname" placeholder="Фамилия">
-            </div>
-
-            <div class="input-fields">
-                <span>Имя: </span>
-                <input type="text" name="lastname" placeholder="Имя">
-            </div>
-
-            <div class="input-fields">
-                <span>Дата рождения: </span>
-                <input type="date" name="birthdate" placeholder="Дата рождения">
-            </div>
-
-            <button class="button-grey m-l-250"><label>Сохранить</label></button>
-        </div>
+        <footer>
+            <form id="upload" th:method="post" enctype="multipart/form-data" action="/settings">
+                <input type="file" id="user-photo" name="file" class="input-file"
+                       onchange="document.getElementById('upload').submit()"/>
+                <label class="button-yellow" for="user-photo">Загрузить фото</label>
+            </form>
+            <form id="save" method="post" action="/settings">
+                <button class="button-grey" th:method="post"><label>Сохранить</label></button>
+            </form>
+        </footer>
     </div>
 </div>
-
 <div class="popup-content">
     <article class="popup-header">
-        <p class="p-modal"
-           th:text="'Загрузка фото профиля - ' + ${currentUser.firstname + ' ' + currentUser.lastname}"></p>
+        <p class="p-modal"></p>
     </article>
     <article class="popup-body">
     </article>
@@ -79,7 +94,6 @@
         <label for="popup" class="button close">Закрыть</label>
     </footer>
 </div>
-
 
 <script src="/js/main.js"></script>
 </body>
