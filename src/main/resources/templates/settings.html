@@ -11,12 +11,6 @@
     <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
     <link rel="stylesheet" href="/css/util.css" media="screen" type="text/css">
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-
-    <script>
-        $(function (){
-            $("#header").load("header.html");
-        })
-    </script>
 </head>
 <body>
 <div id="header"></div>
@@ -66,9 +60,9 @@
                     <p>Дата рождения: </p>
                 </div>
                 <div>
-                    <input type="text" name="firstname" placeholder="Фамилия">
-                    <input type="text" name="lastname" placeholder="Имя">
-                    <input type="date" name="birthdate" placeholder="Дата рождения">
+                    <input type="text" name="firstname" placeholder="Фамилия" th:value="${currentUser.firstname}">
+                    <input type="text" name="lastname" placeholder="Имя" th:value="${currentUser.lastname}">
+                    <input type="date" name="birthdate" placeholder="Дата рождения" th:value="*{currentUser.birthdate}">
                 </div>
             </div>
         </div>

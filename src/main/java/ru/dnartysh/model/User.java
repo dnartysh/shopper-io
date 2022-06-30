@@ -5,9 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -38,11 +39,13 @@ public class User {
     private String imagePath;
 
     @Column(columnDefinition = "DATE")
-    private Date birthdate;
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    private LocalDate birthdate;
 
     @Column(name = "registration_date", columnDefinition = "DATE")
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     @NotNull
-    private Date registrationDate;
+    private LocalDate registrationDate;
 
     private boolean active;
 

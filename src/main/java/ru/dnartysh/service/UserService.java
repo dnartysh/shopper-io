@@ -2,6 +2,7 @@ package ru.dnartysh.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -15,7 +16,11 @@ import java.io.BufferedOutputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class UserService {
@@ -63,7 +68,7 @@ public class UserService {
         user.setPassword(bCryptPasswordEncoder.encode(password));
         user.setRoles(roles);
         user.setActive(true);
-        user.setRegistrationDate(new Date());
+        user.setRegistrationDate(LocalDate.now());
         user.setPosition(positionRepository.findByName("newcomer"));
         userRepository.save(user);
 
@@ -85,6 +90,7 @@ public class UserService {
         fields.put("imgPath", currentUser.getImagePath());
         fields.put("lastname", currentUser.getLastname());
         fields.put("position", currentUser.getPosition().getName());
+        fields.put("birthdate", currentUser.getBirthdate() == null ? "" : currentUser.getBirthdate().toString());
 
         return fields;
     }
@@ -106,5 +112,17 @@ public class UserService {
         } else {
             throw new FileNotFoundException("File not found");
         }
+    }
+
+    public User updateUser(int id, String firstname, String lastname, LocalDate birthdate) {
+        User user = userRepository.findById(id).get();
+
+        user.setFirstname(firstname);
+        user.setLastname(lastname);
+        user.setBirthdate(birthdate);
+
+        userRepository.save(user);
+
+        return user;
     }
 }

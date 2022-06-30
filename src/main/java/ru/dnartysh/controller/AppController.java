@@ -1,16 +1,15 @@
 package ru.dnartysh.controller;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import ru.dnartysh.model.User;
 import ru.dnartysh.service.UserService;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 
 @Controller
@@ -56,6 +55,19 @@ public class AppController {
         userService.saveUser(username, firstname, lastname, password);
 
         return "registration";
+    }
+
+    @PostMapping("/settings/{id}")
+    public String updateUser(@PathVariable int id,
+                             @RequestParam String firstname,
+                             @RequestParam String lastname,
+                             @RequestParam @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate birthdate,
+                             Model model) {
+        userService.updateUser(id, firstname, lastname, birthdate);
+
+        model.addAttribute("currentUser", userService.getSimpleFieldsForCurrentUser());
+
+        return "settings";
     }
 
     @GetMapping("/settings")
