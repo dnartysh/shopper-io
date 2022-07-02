@@ -40,6 +40,13 @@ if (positionCookie === "admin") {
                 {name: 'Магазины', url: '/manager/shop'}]
         }
     })
+} else if (positionCookie === "newcomer") {
+    var menus = new Vue({
+        el: '#nav-list',
+        data: {
+            menus: [{name: 'Главная', url: '/'}]
+        }
+    })
 }
 
 function getCookie(name) {
