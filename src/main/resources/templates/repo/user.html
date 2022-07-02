@@ -30,8 +30,8 @@
         <nav>
             <ul>
                 <div class="user-avatar-header" th:switch="${currentUser.imgPath}">
-                    <img th:case="''" th:src="'/img/user/user-not-found.png'">
-                    <img th:case="*" th:src="${currentUser.imgPath}">
+                    <img th:case="''" th:src="'/data/upload/img/user/user-not-found.png'">
+                    <img th:case="*" th:src="${currentUser.imgPath}" onchange="location.reload()">
                 </div>
                 <li><a href="/settings" th:text="${currentUser.firstname} + ' ' + ${currentUser.lastname}"></a></li>
                 <li><a href="/logout">Выйти</a></li>

@@ -17,12 +17,21 @@
     <div class="logo">
         <a href="/"><img src="/img/logo.png"></a>
     </div>
+    <div class="nav-menu">
+        <nav class="nav-menu">
+            <ul id="nav-list">
+                <li v-for="menu in menus">
+                    <a v-bind:href="menu.url">{{menu.name}}</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
     <div class="header-menu">
         <nav>
             <ul>
                 <div class="user-avatar-header" th:switch="${currentUser.imgPath}">
-                    <img th:case="''" th:src="'/img/user/user-not-found.png'">
-                    <img th:case="*" th:src="${currentUser.imgPath}">
+                    <img th:case="''" th:src="'/data/upload/img/user/user-not-found.png'">
+                    <img th:case="*" th:src="${currentUser.imgPath}" onchange="location.reload()">
                 </div>
                 <li><a href="/settings" th:text="${currentUser.firstname} + ' ' + ${currentUser.lastname}"></a></li>
                 <li><a href="/logout">Выйти</a></li>
