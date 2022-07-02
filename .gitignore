@@ -2,3 +2,4 @@
 *.xml
 /data/
 /.idea/
+/src/main/resources/upload/

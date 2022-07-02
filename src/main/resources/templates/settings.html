@@ -31,8 +31,8 @@
         <nav>
             <ul>
                 <div class="user-avatar-header" th:switch="${currentUser.imgPath}">
-                    <img th:case="''" th:src="'/img/user/user-not-found.png'">
-                    <img th:case="*" th:src="${currentUser.imgPath}">
+                    <img th:case="''" th:src="'/data/upload/img/user/user-not-found.png'">
+                    <img th:case="*" th:src="${currentUser.imgPath}" onchange="location.reload()">
                 </div>
                 <li><a href="/settings" th:text="${currentUser.firstname} + ' ' + ${currentUser.lastname}"></a></li>
                 <li><a href="/logout">Выйти</a></li>
@@ -42,8 +42,6 @@
 </header>
 <input type="checkbox" id="popup">
 <label for="popup" class="popup-bg"></label>
-
-
 <div class="user-setting-content">
     <div class="wrap-user-setting-content">
         <div class="user-setting-body">
@@ -60,21 +58,27 @@
                     <p>Дата рождения: </p>
                 </div>
                 <div>
-                    <input type="text" name="firstname" placeholder="Фамилия" th:value="${currentUser.firstname}">
-                    <input type="text" name="lastname" placeholder="Имя" th:value="${currentUser.lastname}">
-                    <input type="date" name="birthdate" placeholder="Дата рождения" th:value="*{currentUser.birthdate}">
+                    <form id="save" method="post" action="/settings" onsubmit="location.reload()">
+                        <input type="text" name="firstname" placeholder="Фамилия" th:value="${currentUser.firstname}">
+                        <input type="text" name="lastname" placeholder="Имя" th:value="${currentUser.lastname}">
+                        <input type="date" name="birthdate" placeholder="Дата рождения" th:value="*{currentUser.birthdate}">
+                    </form>
                 </div>
             </div>
         </div>
         <footer>
-            <form id="upload" th:method="post" enctype="multipart/form-data" action="/settings">
+            <form id="upload" th:method="post" enctype="multipart/form-data" th:action="'/settings'">
                 <input type="file" id="user-photo" name="file" class="input-file"
                        onchange="document.getElementById('upload').submit()"/>
-                <label class="button-yellow" for="user-photo">Загрузить фото</label>
+                <div class="flex-row">
+                    <label class="button-grey m-r-7" for="user-photo">Загрузить</label>
+                    <input type="checkbox" id="checkbox-photo" name="toDelete" onchange="document.getElementById('upload').submit()"/>
+                    <label class="button-grey m-l-7" for="checkbox-photo">Удалить</label>
+                </div>
             </form>
-            <form id="save" method="post" action="/settings">
-                <button class="button-grey" th:method="post"><label>Сохранить</label></button>
-            </form>
+            <div>
+                <label class="button-yellow m-l-7" for="save" onclick="document.getElementById('save').submit()">Сохранить</label>
+            </div>
         </footer>
     </div>
 </div>
