@@ -85,7 +85,7 @@ public class AppController {
             userService.removeUserPhoto();
         }
 
-        if (!"".equals(firstname) | !"".equals(lastname) | birthdate != null) {
+        if (firstname != null | lastname != null | birthdate != null) {
             userService.updateUser(firstname, lastname, birthdate);
         }
 
