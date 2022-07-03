@@ -56,6 +56,11 @@ ul, li {
     list-style-type: none;
 }
 
+span {
+    font-size: 14px;
+    font-weight: bold;
+}
+
 input {
     display: block;
     width: 100%;
@@ -509,12 +514,10 @@ ul li a:hover {
 }
 
 table {
-    width: 85%;
+    width: 100%;
     max-width: 100%;
-    /*margin: auto;*/
+    margin: auto;
     border: none;
-    margin-top: 20px;
-    margin-bottom: 20px;
 }
 
 table thead th {
@@ -556,6 +559,10 @@ table tbody td {
 
 table tbody tr:nth-child(even) {
     background: #f3f3f3;
+}
+
+table tbody tr:hover {
+    background: #fccd36;
 }
 
 table tbody tr td:first-child {
@@ -672,6 +679,7 @@ label {
     font-weight: bold;
     color: white;
     text-transform: uppercase;
+    text-decoration: none;
     overflow: hidden;
 }
 
@@ -791,7 +799,7 @@ label {
 }
 
 .wrap-user-setting-content {
-    min-width: 50%;
+    min-width: 60%;
     max-width: 75%;
     background: #fff;
     overflow: hidden;
@@ -817,4 +825,36 @@ label {
 
 #checkbox-photo {
     visibility: hidden;
+}
+
+.user-content {
+    width: 100%;
+    min-height: 35%;
+    margin-top: 1.8%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.wrap-user-content {
+    min-width: 70%;
+    max-width: 80%;
+    border-radius: 16px;
+    box-shadow: 1px 20px 40px #777;
+    padding-bottom: 50px;
+}
+.button-table {
+    max-width: 13%;
+    height: 36px;
+}
+
+.table-user-caption {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.input-search-table {
+    max-width: 30%;
 }

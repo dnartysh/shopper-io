@@ -39,6 +39,50 @@
         </nav>
     </div>
 </header>
+<!--<a href="#" onclick="userEdit()"><label for="popup">Изменить</label></a>-->
+
+<div class="user-content">
+    <div class="wrap-user-content">
+        <table id="users-table">
+            <caption>
+
+                <div class="table-user-caption">
+                    <h1>Список пользователей</h1>
+                    <input id="search-text" class="input-search-table" placeholder="Поиск" type="text" onkeyup="tableSearch()"/>
+                    <label class="button-yellow button-table">Добавить</label>
+                </div>
+            </caption>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Логин</th>
+                <th>Имя</th>
+                <th>Фамилия</th>
+                <th>Дата рождения</th>
+                <th>Дата регистрации</th>
+                <th>Включен</th>
+                <th>Изменить</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <div th:each="user : ${users}">
+                <tr>
+                    <td th:text="${user.id}"></td>
+                    <td th:text="${user.username}"></td>
+                    <td th:text="${user.firstname}"></td>
+                    <td th:text="${user.lastname}"></td>
+                    <td th:text="${user.birthdate}"></td>
+                    <td th:text="${user.registrationDate}"></td>
+                    <td th:text="${user.active}"></td>
+                    <td><a href="#" onclick="userEdit()"><label for="popup">Изменить</label></a></td>
+                </tr>
+            </div>
+            </tbody>
+        </table>
+    </div>
+</div>
+
 
 <input type="checkbox" id="popup"/>
 <label for="popup" class="popup-bg"></label>

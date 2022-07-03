@@ -13,7 +13,7 @@ import ru.shopper.repository.PositionRepository;
 import ru.shopper.repository.RoleRepository;
 import ru.shopper.repository.UserRepository;
 
-import java.io.*;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDate;
@@ -43,8 +43,16 @@ public class UserService {
         this.positionRepository = positionRepository;
     }
 
-    public User findUserByUsername(String username) {
+    public User getUserByUsername(String username) {
         return userRepository.findByUsername(username);
+    }
+
+    public List<User> getAllUsers() {
+        List<User> users = new ArrayList<>();
+
+        userRepository.findAll().forEach(users::add);
+
+        return users;
     }
 
     public User saveUser(String username, String firstname,

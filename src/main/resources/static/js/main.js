@@ -1,17 +1,11 @@
-// var currentUrl = document.URL
-// var hostURI = window.location.protocol + "//" + window.location.host;
-// var adminURI = hostURI + '/admin';
-// var userURI = hostURI + '/user';
-
 const positionCookie = getCookie("position");
+
 if (positionCookie === "admin") {
     var menus = new Vue({
         el: '#nav-list',
         data: {
             menus: [{name: 'Пользователи', url: '/admin/user'},
-                {name: 'Статистика', url: '/admin/statistic'},
-                {name: 'Магазины', url: '/admin/shop'},
-                {name: 'Склады', url: '/admin/storage'},]
+                {name: 'Статистика', url: '/admin/statistic'}]
         }
     })
 } else if (positionCookie === "seller") {
@@ -53,4 +47,24 @@ function getCookie(name) {
     const value = `; ${document.cookie}`;
     const parts = value.split(`; ${name}=`);
     if (parts.length === 2) return parts.pop().split(';').shift();
+}
+
+function tableSearch() {
+    var phrase = document.getElementById('search-text');
+    var table = document.getElementById('users-table');
+    var regPhrase = new RegExp(phrase.value, 'i');
+    var flag = false;
+    for (var i = 1; i < table.rows.length; i++) {
+        flag = false;
+        for (var j = table.rows[i].cells.length - 1; j >= 0; j--) {
+            flag = regPhrase.test(table.rows[i].cells[j].innerHTML);
+            if (flag) break;
+        }
+        if (flag) {
+            table.rows[i].style.display = "";
+        } else {
+            table.rows[i].style.display = "none";
+        }
+
+    }
 }

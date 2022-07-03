@@ -20,6 +20,7 @@ public class AdminController {
     @GetMapping("/user")
     public String getUsersPage(Model model) {
         model.addAttribute("currentUser", userService.getSimpleFieldsForCurrentUser());
+        model.addAttribute("users", userService.getAllUsers());
 
         return "repo/user";
     }
