@@ -1,0 +1,30 @@
+services:
+  shopper-app:
+    container_name: "shopper-app"
+    restart: always
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    networks:
+      - "shopper-network"
+    environment:
+      - DB_URL=jdbc:mysql://db:3306/shopper
+      - DB_USER=user
+      - DB_PASSWORD=Reds-2252!
+    entrypoint: ["java", "-jar", "/app.jar"]
+  db:
+    image: mysql:latest
+    ports:
+      - "3307:3306"
+    networks:
+      - "shopper-network"
+    environment:
+      MYSQL_DATABASE: 'shopper'
+      MYSQL_ROOT_PASSWORD: 'Reds-2252!'
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'Reds-2252!'
+networks:
+  shopper-network:
+    driver: bridge
