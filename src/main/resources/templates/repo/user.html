@@ -80,9 +80,8 @@
         </table>
     </div>
 </div>
-
-
 <input type="checkbox" id="popup"/>
+<input type="checkbox" id="warning-popup">
 <label for="popup" class="popup-bg"></label>
 <div class="popup-content">
     <article class="popup-header">
@@ -123,8 +122,22 @@
     </article>
 
     <footer>
-        <label class="button success" onclick="submitData('save-user')">Сохранить</label>
+        <label class="button success" for="save-user" onclick="checkPassword() ?
+        submitData('save-user') : showErrorPopup('Ошибка!', 'Неверно введен пароль!')">Сохранить</label>
         <label for="popup" class="button close">Закрыть</label>
+    </footer>
+</div>
+
+<div class="warning-content">
+    <article class="popup-header">
+        <p id="warning-popup-header" class="p-modal"></p>
+    </article>
+    <article class="popup-body">
+        <img id="warning-popup-body-img" class="p-modal">
+        <p id="warning-popup-body" class="p-modal"></p>
+    </article>
+    <footer>
+        <label for="warning-popup" class="button close">Закрыть</label>
     </footer>
 </div>
 

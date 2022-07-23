@@ -629,7 +629,7 @@ label {
     transition: background-color 250ms linear;
 }
 
-.popup-content {
+.popup-content, .warning-content {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -647,17 +647,17 @@ label {
     z-index: 20;
 }
 
-.popup-content .p-modal {
+.popup-content .p-modal, .warning-content .p-modal {
     text-align: center;
     font-size: 18px;
 }
 
-.popup-content #popup-body-img {
+.popup-content #popup-body-img, .warning-content #warning-popup-body-img {
     width: 13%;
     height: 12%;
 }
 
-.popup-content .popup-btn-close {
+.popup-content .popup-btn-close, .warning-content .popup-btn-close {
     position: relative;
     float: right;
     font-size: 18px;
@@ -665,19 +665,19 @@ label {
     z-index: 11;
 }
 
-.popup-content header {
+.popup-content header, .warning-content header {
     position: relative;
     display: block;
     border-bottom: 1px solid #eee;
 }
 
-.popup-content header h2 {
+.popup-content header h2, .warning-content header h2 {
     margin: 0 0 10px;
     padding: 0;
     font-size: 28px;
 }
 
-.popup-content article {
+.popup-content article, .warning-content article {
     position: relative;
     display: block;
     margin: 0;
@@ -686,7 +686,7 @@ label {
     line-height: 1.75;
 }
 
-.popup-content footer {
+.popup-content footer, .warning-content footer {
     position: relative;
     display: flex;
     align-items: center;
@@ -696,7 +696,7 @@ label {
     padding: 18px 0 0;
 }
 
-.popup-content footer .button {
+.popup-content footer .button, .warning-content footer .button {
     position: relative;
     padding: 10px 25px;
     border-radius: 14px;
@@ -708,7 +708,7 @@ label {
     overflow: hidden;
 }
 
-.popup-content footer .button:before {
+.popup-content footer .button:before, .warning-content footer .button:before {
     position: absolute;
     content: '';
     top: 0;
@@ -718,11 +718,11 @@ label {
     z-index: 0;
 }
 
-.popup-content footer .button:hover:before {
+.popup-content footer .button:hover:before, .warning-content footer .button:hover:before {
     width: 100%;
 }
 
-.popup-content footer .button.success {
+.popup-content footer .button.success, .warning-content footer .button.success {
     margin-right: 5px;
     color: #0a0a0b;
     padding: 10px 20px;
@@ -731,21 +731,22 @@ label {
     border-radius: 14px;
 }
 
-.popup-content footer .button.close {
+.popup-content footer .button.close, .warning-content footer .button.close {
     background-color: #fccd36;
     color: #0a0a0b;
     border-radius: 14px;
     font-weight: bold;
 }
 
-.popup-content footer .button.success:hover, .popup-content footer .button.close:hover {
+.popup-content footer .button.success:hover, .popup-content footer .button.close:hover,
+.warning-content footer .button.success:hover, .warning-content footer .button.close:hover{
     background: #3f4857;
     color: #fff;
     transition: .5s;
     border-radius: 14px;
 }
 
-#popup {
+#popup, #warning-popup {
     display: none;
 }
 
@@ -757,6 +758,20 @@ label {
 }
 
 #popup:checked ~ .popup-content {
+    visibility: visible;
+    transform: scale(1);
+    transition: transform 250ms ease;
+    z-index: 111;
+}
+
+#warning-popup:checked ~ .popup-bg {
+    visibility: visible;
+    background-color: black;
+    opacity: 0.7;
+    transition: background-color 250ms linear;
+}
+
+#warning-popup:checked ~ .warning-content {
     visibility: visible;
     transform: scale(1);
     transition: transform 250ms ease;
@@ -869,6 +884,7 @@ label {
     box-shadow: 1px 20px 40px #777;
     padding-bottom: 10px;
 }
+
 .button-table {
     max-width: 13%;
     height: 36px;

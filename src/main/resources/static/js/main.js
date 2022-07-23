@@ -77,10 +77,12 @@ function submitData(elementId) {
 }
 
 function showSuccessPopup(headerMessage, bodyMessage) {
-    var check = document.getElementById('popup');
-    var header = document.getElementById('popup-header');
-    var body = document.getElementById('popup-body')
+    var check = document.getElementById('warning-popup');
+    var header = document.getElementById('warning-popup-header');
+    var bodyImg = document.getElementById('warning-popup-body-img');
+    var body = document.getElementById('warning-popup-body');
 
+    bodyImg.src = "/img/success.png";
     header.innerHTML = headerMessage;
     body.innerHTML = bodyMessage;
 
@@ -88,10 +90,14 @@ function showSuccessPopup(headerMessage, bodyMessage) {
 }
 
 function showErrorPopup(headerMessage, bodyMessage) {
-    var check = document.getElementById('popup');
-    var header = document.getElementById('popup-header');
-    var bodyImg = document.getElementById('popup-body-img');
-    var body = document.getElementById('popup-body');
+    var check = document.getElementById('warning-popup');
+    var header = document.getElementById('warning-popup-header');
+    var bodyImg = document.getElementById('warning-popup-body-img');
+    var body = document.getElementById('warning-popup-body');
+
+    // var content = document.getElementsByName('warning-content');
+
+    // content.style.zIndex = '300';
 
     bodyImg.src = "/img/error.png";
     header.innerHTML = headerMessage;
