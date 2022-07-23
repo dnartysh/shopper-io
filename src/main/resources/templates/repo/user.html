@@ -32,7 +32,7 @@
             <ul>
                 <div class="user-avatar-header" th:switch="${currentUser.imgPath}">
                     <img th:case="''" th:src="'/data/upload/img/user/user-not-found.png'">
-                    <img th:case="*" th:src="${currentUser.imgPath}" onchange="location.reload()">
+                    <img th:case="*" th:src="${currentUser.get}" onchange="location.reload()">
                 </div>
                 <li><a href="/settings" th:text="${currentUser.firstname} + ' ' + ${currentUser.lastname}"></a></li>
                 <li><a href="/logout">Выйти</a></li>
@@ -56,6 +56,7 @@
                 <th>Логин</th>
                 <th>Имя</th>
                 <th>Фамилия</th>
+                <th>Должность</th>
                 <th>Дата рождения</th>
                 <th>Дата регистрации</th>
                 <th>Включен</th>
@@ -67,12 +68,13 @@
             <div th:each="user : ${users}">
                 <tr>
                     <td id="td-user-id" th:text="${user.id}"></td>
-                    <td id="td-user-username" th:text="${user.username}"></td>
-                    <td th:text="${user.firstname}"></td>
-                    <td th:text="${user.lastname}"></td>
-                    <td th:text="${user.birthdate}"></td>
-                    <td th:text="${user.registrationDate}"></td>
-                    <td><input type="checkbox" th:checked="${user.active}"/></td>
+                    <td id="td-user-username" th:text="${user.getUsername()}"></td>
+                    <td th:text="${user.getFirstname()}"></td>
+                    <td th:text="${user.getLastname()}"></td>
+                    <td th:text="${user.position.getName()}"></td>
+                    <td th:text="${user.getBirthdate()}"></td>
+                    <td th:text="${user.getRegistrationDate()}"></td>
+                    <td><input disabled type="checkbox" th:checked="${user.isActive()}"/></td>
                     <td><a href="#" onclick="fillUsersFields()"><label for="popup">Изменить</label></a></td>
                 </tr>
             </div>
@@ -114,7 +116,7 @@
                         </option>
                     </select>
                     <input id="user-birthdate" type="date" name="birthdate" placeholder="Дата рождения">
-                    <input id="user-active" type="checkbox" value="true" name="active" placeholder="Включен">
+                    <input id="user-active" type="checkbox" th:checked="${currentUser.active}" name="active" placeholder="Включен">
                     <input id="new-user-checkbox" type="checkbox" value="true" name="isNew">
                 </form>
             </div>

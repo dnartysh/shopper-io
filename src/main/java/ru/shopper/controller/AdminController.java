@@ -41,7 +41,7 @@ public class AdminController {
                            @RequestParam(required = false) String position,
                            @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate birthdate,
                            @RequestParam(defaultValue = "false") boolean active,
-                           @RequestParam boolean isNew) throws Exception {
+                           @RequestParam(defaultValue = "false") boolean isNew) throws Exception {
         userService.addBasicAttributes(model);
         model.addAttribute("users", userService.getAllUsers());
 

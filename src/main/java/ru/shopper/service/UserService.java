@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 import ru.shopper.config.AppConstants;
 import ru.shopper.exception.PositionNotFoundException;
+import ru.shopper.exception.UserNotFoundException;
 import ru.shopper.model.Position;
 import ru.shopper.model.Role;
 import ru.shopper.model.User;
@@ -123,7 +124,7 @@ public class UserService {
         fields.put("firstname", currentUser.getFirstname());
         fields.put("lastname", currentUser.getLastname());
         fields.put("imgPath", currentUser.getImagePath());
-        fields.put("position", currentUser.getPosition().getName());
+        fields.put("position", currentUser.getPosition().getDescription());
         fields.put("birthdate", currentUser.getBirthdate() == null ? "" : currentUser.getBirthdate().toString());
         fields.put("active", Boolean.toString(currentUser.isActive()));
 
@@ -175,8 +176,12 @@ public class UserService {
     }
 
     public void updateUser(String username, String firstname, String lastname, LocalDate birthdate,
-                           String password, boolean active) {
-        User user = getCurrentUser();
+                           String password, boolean active) throws UserNotFoundException {
+        User user = userRepository.findByUsername(username);
+
+        if (user == null) {
+            throw new UserNotFoundException("Пользователь с логином - " + username + " не найден!");
+        }
 
         user.setUsername(username);
         user.setFirstname(firstname);
