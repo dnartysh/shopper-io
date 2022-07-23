@@ -72,7 +72,8 @@ create table shops
 create table positions
 (
     id int primary key not null auto_increment,
-    name varchar(150) not null
+    name varchar(150) not null,
+    description varchar(500)
 );
 
 create table user_positions

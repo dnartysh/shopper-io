@@ -47,7 +47,7 @@
         <div class="user-setting-body">
             <div class="photo">
                 <div th:switch="${currentUser.imgPath}">
-                    <img th:case="''" th:src="'/img/user/user-not-found.png'" class="photo">
+                    <img th:case="''" th:src="'/data/upload/img/user/user-not-found.png'" class="photo">
                     <img th:case="*" th:src="${currentUser.imgPath}" class="photo">
                 </div>
             </div>
@@ -56,12 +56,16 @@
                     <p>Фамилия: </p>
                     <p>Имя: </p>
                     <p>Дата рождения: </p>
+                    <p>Новый пароль: </p>
+                    <p>Повторите пароль: </p>
                 </div>
                 <div>
                     <form id="save" method="post" action="/settings" onsubmit="location.reload()">
                         <input type="text" name="firstname" placeholder="Фамилия" th:value="${currentUser.firstname}">
                         <input type="text" name="lastname" placeholder="Имя" th:value="${currentUser.lastname}">
                         <input type="date" name="birthdate" placeholder="Дата рождения" th:value="*{currentUser.birthdate}">
+                        <input type="password" id="new-pass" name="password" placeholder="Новый пароль">
+                        <input type="password" id="new-pass-checked" placeholder="Повторите пароль">
                     </form>
                 </div>
             </div>
@@ -77,16 +81,21 @@
                 </div>
             </form>
             <div>
-                <label class="button-yellow m-l-7" for="save" onclick="document.getElementById('save').submit()">Сохранить</label>
+                <label class="button-yellow m-l-7" for="save"
+                       onclick="checkPassword() ? submitData('save') :
+                       showErrorPopup('Ошибка!', 'Неправильно введен пароль')">Сохранить</label>
             </div>
         </footer>
     </div>
 </div>
+
 <div class="popup-content">
     <article class="popup-header">
-        <p class="p-modal"></p>
+        <p id="popup-header" class="p-modal"></p>
     </article>
     <article class="popup-body">
+        <img id="popup-body-img" class="p-modal">
+        <p id="popup-body" class="p-modal"></p>
     </article>
     <footer>
         <label for="popup" class="button close">Закрыть</label>
@@ -94,4 +103,5 @@
 </div>
 
 <script src="/js/main.js"></script>
+<script src="/js/security.js"></script>
 </body>

@@ -64,17 +64,37 @@ span {
 input {
     display: block;
     width: 100%;
-    height: calc(2.25rem + 2px);
-    padding: 0.375rem 0.75rem;
+    height: calc(2.25rem + 1px);
+    padding: 5px;
     font-family: inherit;
-    font-size: 1rem;
+    font-size: 15px;
     font-weight: bold;
     color: #212529;
     background-color: #fff;
     background-clip: padding-box;
     border: 1px solid #bdbdbd;
     border-radius: 8px;
-    /*transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;*/
+}
+
+input[type=checkbox] {
+    margin: 8px;
+    width: 16px;
+    height: 16px;
+}
+
+select {
+    display: block;
+    width: 100%;
+    height: calc(2.25rem + 1px);
+    padding: 5px;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: bold;
+    color: #212529;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #bdbdbd;
+    border-radius: 8px;
 }
 
 textarea {
@@ -632,6 +652,11 @@ label {
     font-size: 18px;
 }
 
+.popup-content #popup-body-img {
+    width: 13%;
+    height: 12%;
+}
+
 .popup-content .popup-btn-close {
     position: relative;
     float: right;
@@ -842,7 +867,7 @@ label {
     max-width: 80%;
     border-radius: 16px;
     box-shadow: 1px 20px 40px #777;
-    padding-bottom: 50px;
+    padding-bottom: 10px;
 }
 .button-table {
     max-width: 13%;
@@ -857,4 +882,8 @@ label {
 
 .input-search-table {
     max-width: 30%;
+}
+
+#new-user-checkbox {
+    visibility: hidden;
 }

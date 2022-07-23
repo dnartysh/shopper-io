@@ -22,14 +22,14 @@ public class SellerController {
 
     @GetMapping("/shop")
     public String getShopPage(Model model) {
-        model.addAttribute("currentUser", userService.getSimpleFieldsForCurrentUser());
+        userService.addBasicAttributes(model);
 
         return "repo/shop";
     }
 
     @GetMapping("/sell")
     public String getSellPage(Model model) {
-        model.addAttribute("currentUser", userService.getSimpleFieldsForCurrentUser());
+        userService.addBasicAttributes(model);
 
         return "doc/sell";
     }

@@ -5,8 +5,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 import ru.shopper.config.AppConstants;
+import ru.shopper.exception.PositionNotFoundException;
+import ru.shopper.model.Position;
 import ru.shopper.model.Role;
 import ru.shopper.model.User;
 import ru.shopper.repository.PositionRepository;
@@ -55,19 +58,8 @@ public class UserService {
         return users;
     }
 
-    public User saveUser(String username, String firstname,
-                         String lastname, String password) throws Exception {
-        User user = userRepository.findByUsername(username);
-
-        if (user == null) {
-            return createUser(username, firstname, lastname, password);
-        } else {
-            throw new Exception("User with login - " + username + " already exists");
-        }
-    }
-
-    private User createUser(String username, String firstname,
-                            String lastname, String password) {
+    public void createUser(String username, String firstname,
+                           String lastname, String password) {
         User user = new User();
 
         List<Role> roles = new ArrayList<>();
@@ -82,8 +74,38 @@ public class UserService {
         user.setRegistrationDate(LocalDate.now());
         user.setPosition(positionRepository.findByName("newcomer"));
         userRepository.save(user);
+    }
 
-        return user;
+    public void createUser(String username, String firstname,
+                           String lastname, String password, String position,
+                           LocalDate birthdate, boolean active) throws PositionNotFoundException {
+        User user = new User();
+        Position userPosition = positionRepository.findByName(position);
+        List<Role> roles = new ArrayList<>();
+
+        if (userPosition == null) {
+            throw new PositionNotFoundException("Позиция - " + position + " не найдена!");
+        }
+
+        if (isAdminPosition(userPosition)) {
+            roles.add(roleRepository.findByName("ROLE_ADMIN"));
+        } else {
+            roles.add(roleRepository.findByName("ROLE_USER"));
+        }
+
+        user.setUsername(username);
+        user.setFirstname(firstname);
+        user.setLastname(lastname);
+        user.setPassword(bCryptPasswordEncoder.encode(password));
+        user.setRoles(roles);
+        user.setActive(active);
+        user.setRegistrationDate(LocalDate.now());
+        user.setPosition(userPosition);
+        userRepository.save(user);
+    }
+
+    private boolean isAdminPosition(Position position) {
+        return "admin".equals(position.getName());
     }
 
     public User getCurrentUser() {
@@ -97,11 +119,13 @@ public class UserService {
         User currentUser = getCurrentUser();
 
         fields.put("id", String.valueOf(currentUser.getId()));
+        fields.put("username", currentUser.getUsername());
         fields.put("firstname", currentUser.getFirstname());
-        fields.put("imgPath", currentUser.getImagePath());
         fields.put("lastname", currentUser.getLastname());
+        fields.put("imgPath", currentUser.getImagePath());
         fields.put("position", currentUser.getPosition().getName());
         fields.put("birthdate", currentUser.getBirthdate() == null ? "" : currentUser.getBirthdate().toString());
+        fields.put("active", Boolean.toString(currentUser.isActive()));
 
         return fields;
     }
@@ -129,7 +153,7 @@ public class UserService {
         }
     }
 
-    public User updateUser(String firstname, String lastname, LocalDate birthdate) {
+    public void updateUser(String firstname, String lastname, LocalDate birthdate) {
         User user = getCurrentUser();
 
         user.setFirstname(firstname);
@@ -137,7 +161,42 @@ public class UserService {
         user.setBirthdate(birthdate);
 
         userRepository.save(user);
+    }
 
-        return user;
+    public void updateUser(String firstname, String lastname, LocalDate birthdate, String password) {
+        User user = getCurrentUser();
+
+        user.setFirstname(firstname);
+        user.setLastname(lastname);
+        user.setBirthdate(birthdate);
+        user.setPassword(bCryptPasswordEncoder.encode(password));
+
+        userRepository.save(user);
+    }
+
+    public void updateUser(String username, String firstname, String lastname, LocalDate birthdate,
+                           String password, boolean active) {
+        User user = getCurrentUser();
+
+        user.setUsername(username);
+        user.setFirstname(firstname);
+        user.setLastname(lastname);
+        user.setBirthdate(birthdate);
+        user.setActive(active);
+        user.setPassword(bCryptPasswordEncoder.encode(password));
+
+        userRepository.save(user);
+    }
+
+    public List<Position> getPositions() {
+        List<Position> positions = new ArrayList<>();
+
+        positionRepository.findAll().forEach(positions::add);
+
+        return positions;
+    }
+
+    public void addBasicAttributes(Model model) {
+        model.addAttribute("currentUser", getSimpleFieldsForCurrentUser());
     }
 }

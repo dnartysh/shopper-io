@@ -22,21 +22,21 @@ public class StorekeeperController {
 
     @GetMapping("/storage")
     public String getStoragePage(Model model) {
-        model.addAttribute("currentUser", userService.getSimpleFieldsForCurrentUser());
+        userService.addBasicAttributes(model);
 
         return "repo/storage";
     }
 
     @GetMapping("/entry")
     public String getEntryPage(Model model) {
-        model.addAttribute("currentUser", userService.getSimpleFieldsForCurrentUser());
+        userService.addBasicAttributes(model);
 
         return "doc/entry";
     }
 
     @GetMapping("/dispatch")
     public String getDispatchPage(Model model) {
-        model.addAttribute("currentUser", userService.getSimpleFieldsForCurrentUser());
+        userService.addBasicAttributes(model);
 
         return "doc/dispatch";
     }

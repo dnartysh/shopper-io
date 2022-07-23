@@ -2,12 +2,12 @@ insert into shopper.roles (id, name) values
 (1, 'ROLE_ADMIN'),
 (2, 'ROLE_USER');
 
-insert into shopper.positions (id, name) values
-(1, 'seller'),
-(2, 'manager'),
-(3, 'storekeeper'),
-(4, 'admin'),
-(5, 'newcomer');
+insert into shopper.positions (id, name, description) values
+(1, 'seller', 'Продавец'),
+(2, 'manager', 'Менеджер'),
+(3, 'storekeeper', 'Кладовщик'),
+(4, 'admin', 'Админ'),
+(5, 'newcomer', 'Новичок');
 
 insert into shopper.shops (id, name, address, description) values
 (1, 'Velikiy shop', 'Street Pushkina, 1', 'Prihodite syuda'),

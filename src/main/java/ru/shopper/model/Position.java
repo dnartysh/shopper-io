@@ -21,6 +21,8 @@ public class Position {
 
     private String name;
 
+    private String description;
+
     @OneToMany(mappedBy = "position", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<User> users;
 }

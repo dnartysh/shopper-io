@@ -19,7 +19,7 @@ public class NewcomerController {
 
     @GetMapping
     public String getNewcomerPage(Model model) {
-        model.addAttribute("currentUser", userService.getSimpleFieldsForCurrentUser());
+        userService.addBasicAttributes(model);
 
         return "account/newcomer";
     }

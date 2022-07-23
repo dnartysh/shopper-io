@@ -12,8 +12,8 @@ if (positionCookie === "admin") {
     var menus = new Vue({
         el: '#nav-list',
         data: {
-        menus: [{name: 'Магазины', url: '/seller/shop'},
-            {name: 'Продажи', url: '/seller/sell'}]
+            menus: [{name: 'Магазины', url: '/seller/shop'},
+                {name: 'Продажи', url: '/seller/sell'}]
         }
     })
 } else if (positionCookie === "storekeeper") {
@@ -31,7 +31,8 @@ if (positionCookie === "admin") {
         data: {
             menus: [{name: 'Товары', url: '/manager/product'},
                 {name: 'Заказы', url: '/manager/order'},
-                {name: 'Магазины', url: '/manager/shop'}]
+                {name: 'Магазины', url: '/manager/shop'},
+                {name: 'Пользователи', url: '/manager/user'}]
         }
     })
 } else if (positionCookie === "newcomer") {
@@ -54,17 +55,47 @@ function tableSearch() {
     var table = document.getElementById('users-table');
     var regPhrase = new RegExp(phrase.value, 'i');
     var flag = false;
+
     for (var i = 1; i < table.rows.length; i++) {
         flag = false;
+
         for (var j = table.rows[i].cells.length - 1; j >= 0; j--) {
             flag = regPhrase.test(table.rows[i].cells[j].innerHTML);
             if (flag) break;
         }
+
         if (flag) {
             table.rows[i].style.display = "";
         } else {
             table.rows[i].style.display = "none";
         }
-
     }
+}
+
+function submitData(elementId) {
+    document.getElementById(elementId).submit();
+}
+
+function showSuccessPopup(headerMessage, bodyMessage) {
+    var check = document.getElementById('popup');
+    var header = document.getElementById('popup-header');
+    var body = document.getElementById('popup-body')
+
+    header.innerHTML = headerMessage;
+    body.innerHTML = bodyMessage;
+
+    check.checked = true;
+}
+
+function showErrorPopup(headerMessage, bodyMessage) {
+    var check = document.getElementById('popup');
+    var header = document.getElementById('popup-header');
+    var bodyImg = document.getElementById('popup-body-img');
+    var body = document.getElementById('popup-body');
+
+    bodyImg.src = "/img/error.png";
+    header.innerHTML = headerMessage;
+    body.innerHTML = bodyMessage;
+
+    check.checked = true;
 }

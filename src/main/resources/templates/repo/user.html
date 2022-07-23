@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css"/>
     <link rel="stylesheet" href="/css/util.css" media="screen" type="text/css"/>
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
 <header>
@@ -39,17 +40,14 @@
         </nav>
     </div>
 </header>
-<!--<a href="#" onclick="userEdit()"><label for="popup">Изменить</label></a>-->
-
 <div class="user-content">
     <div class="wrap-user-content">
         <table id="users-table">
             <caption>
-
                 <div class="table-user-caption">
                     <h1>Список пользователей</h1>
                     <input id="search-text" class="input-search-table" placeholder="Поиск" type="text" onkeyup="tableSearch()"/>
-                    <label class="button-yellow button-table">Добавить</label>
+                    <label class="button-yellow button-table" for="popup" onclick="clearUserFields()">Добавить</label>
                 </div>
             </caption>
             <thead>
@@ -68,14 +66,14 @@
 
             <div th:each="user : ${users}">
                 <tr>
-                    <td th:text="${user.id}"></td>
-                    <td th:text="${user.username}"></td>
+                    <td id="td-user-id" th:text="${user.id}"></td>
+                    <td id="td-user-username" th:text="${user.username}"></td>
                     <td th:text="${user.firstname}"></td>
                     <td th:text="${user.lastname}"></td>
                     <td th:text="${user.birthdate}"></td>
                     <td th:text="${user.registrationDate}"></td>
-                    <td th:text="${user.active}"></td>
-                    <td><a href="#" onclick="userEdit()"><label for="popup">Изменить</label></a></td>
+                    <td><input type="checkbox" th:checked="${user.active}"/></td>
+                    <td><a href="#" onclick="fillUsersFields()"><label for="popup">Изменить</label></a></td>
                 </tr>
             </div>
             </tbody>
@@ -88,20 +86,50 @@
 <label for="popup" class="popup-bg"></label>
 <div class="popup-content">
     <article class="popup-header">
-        <p class="p-modal">Редактирование пользователя - {user}</p>
+        <p id="popup-header-text" class="p-modal"></p>
     </article>
 
     <article class="popup-body">
-        <p>Поля - {field}</p>
+        <div class="info flex-row">
+            <div>
+                <p>Логин: </p>
+                <p>Имя: </p>
+                <p>Фамилия: </p>
+                <p>Новый пароль: </p>
+                <p>Повторите пароль: </p>
+                <p>Должность: </p>
+                <p>Дата рождения: </p>
+                <p>Включен: </p>
+            </div>
+            <div>
+                <form class="m-l-30" id="save-user" method="post" action="/admin/user" onsubmit="location.reload()">
+                    <input id="user-username" type="text" name="username" placeholder="Логин">
+                    <input id="user-firstname" type="text" name="firstname" placeholder="Имя">
+                    <input id="user-lastname" type="text" name="lastname" placeholder="Фамилия">
+                    <input id="new-pass" type="password" name="password" placeholder="Новый пароль">
+                    <input id="new-pass-checked" type="password" placeholder="Повторите пароль">
+                    <select id="position" name="position">
+                        <option th:each="position : ${positions}"
+                                th:value="${position.getName()}"
+                                th:text="${position.getDescription()}">
+                        </option>
+                    </select>
+                    <input id="user-birthdate" type="date" name="birthdate" placeholder="Дата рождения">
+                    <input id="user-active" type="checkbox" value="true" name="active" placeholder="Включен">
+                    <input id="new-user-checkbox" type="checkbox" value="true" name="isNew">
+                </form>
+            </div>
+        </div>
     </article>
 
     <footer>
-        <a href="#" class="button success">Сохранить</a>
+        <label class="button success" onclick="submitData('save-user')">Сохранить</label>
         <label for="popup" class="button close">Закрыть</label>
     </footer>
 </div>
 
 <script src="/js/main.js"></script>
-<script src="/js/admin.js"></script>
+<script src="/js/user.js"></script>
+<script src="/js/security.js"></script>
 </body>
 </html>

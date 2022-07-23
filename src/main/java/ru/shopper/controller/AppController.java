@@ -27,7 +27,7 @@ public class AppController {
     @GetMapping("/")
     public String redirectToPage(Model model) {
         User user = userService.getCurrentUser();
-        model.addAttribute("currentUser", userService.getSimpleFieldsForCurrentUser());
+        userService.addBasicAttributes(model);
 
         return "account/" + user.getPosition().getName();
     }
@@ -40,7 +40,7 @@ public class AppController {
     @PostMapping(value = "/login")
     public String loginSuccess(Model model) {
         User currentUser = userService.getCurrentUser();
-        model.addAttribute("currentUser", userService.getSimpleFieldsForCurrentUser());
+        userService.addBasicAttributes(model);
 
         return "account/" + currentUser.getPosition().getName();
     }
@@ -51,31 +51,40 @@ public class AppController {
     }
 
     @PostMapping("/registration")
-    public String registerUser(@RequestParam String username,
+    public String registerUser(Model model,
+                               @RequestParam String username,
                                @RequestParam String firstname,
                                @RequestParam String lastname,
                                @RequestParam String password) throws Exception {
-        userService.saveUser(username, firstname, lastname, password);
+        User user = userService.getUserByUsername(username);
+
+        if (user == null) {
+            userService.createUser(username, firstname, lastname, password);
+        } else {
+            model.addAttribute("error", "Пользователь с логином - "
+                    + username + " уже существует!");
+        }
 
         return "registration";
     }
 
     @GetMapping("/settings")
     public String settingsPage(Model model) {
-        model.addAttribute("currentUser", userService.getSimpleFieldsForCurrentUser());
+        userService.addBasicAttributes(model);
 
         return "settings";
     }
 
     @PostMapping("/settings")
-    public String uploadPhoto(@RequestParam(required = false) MultipartFile file,
+    public String updateUser(@RequestParam(required = false) MultipartFile file,
                               @RequestParam(required = false) boolean toDelete,
                               @RequestParam(required = false) String firstname,
                               @RequestParam(required = false) String lastname,
+                              @RequestParam(required = false) String password,
                               @RequestParam(required = false)
                                   @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate birthdate,
                               Model model) throws IOException {
-        model.addAttribute("currentUser", userService.getSimpleFieldsForCurrentUser());
+        userService.addBasicAttributes(model);
 
         if (file != null) {
             userService.uploadUserPhoto(file);
@@ -86,7 +95,11 @@ public class AppController {
         }
 
         if (firstname != null | lastname != null | birthdate != null) {
-            userService.updateUser(firstname, lastname, birthdate);
+            if (password != null) {
+                userService.updateUser(firstname, lastname, birthdate, password);
+            } else {
+                userService.updateUser(firstname, lastname, birthdate);
+            }
         }
 
         return "settings";

@@ -22,22 +22,30 @@ public class ManagerController {
 
     @GetMapping("/product")
     public String getProductPage(Model model) {
-        model.addAttribute("currentUser", userService.getSimpleFieldsForCurrentUser());
+        userService.addBasicAttributes(model);
 
         return "repo/product";
     }
 
     @GetMapping("/order")
     public String getOrderPage(Model model) {
-        model.addAttribute("currentUser", userService.getSimpleFieldsForCurrentUser());
+        userService.addBasicAttributes(model);
 
         return "doc/order";
     }
 
     @GetMapping("/shop")
     public String getShopPage(Model model) {
-        model.addAttribute("currentUser", userService.getSimpleFieldsForCurrentUser());
+        userService.addBasicAttributes(model);
 
         return "repo/shop";
+    }
+
+    @GetMapping("/user")
+    public String getUserPage(Model model) {
+        userService.addBasicAttributes(model);
+        model.addAttribute("users", userService.getAllUsers());
+
+        return "repo/user";
     }
 }
