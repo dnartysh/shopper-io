@@ -23,6 +23,13 @@ public class AdminController {
         this.userService = userService;
     }
 
+    @GetMapping
+    public String adminPage(Model model) {
+        userService.addBasicAttributes(model);
+
+        return "account/admin";
+    }
+
     @GetMapping("/user")
     public String getUsersPage(Model model) {
         userService.addBasicAttributes(model);

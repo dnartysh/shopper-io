@@ -26,18 +26,31 @@ public class AppController {
 
     @GetMapping("/")
     public String redirectToPage(Model model) {
-        User user = userService.getCurrentUser();
         userService.addBasicAttributes(model);
 
-        return "account/" + user.getPosition().getName();
+        return "pre/welcome";
+    }
+
+    @GetMapping
+    public String redirectToMainPage(Model model) {
+        userService.addBasicAttributes(model);
+
+        return "pre/welcome";
+    }
+
+    @GetMapping("/welcome")
+    public String welcomePage(Model model) {
+        userService.addBasicAttributes(model);
+
+        return "pre/welcome";
     }
 
     @GetMapping("/login")
     public String loginPage() {
-        return "login";
+        return "pre/login";
     }
 
-    @PostMapping(value = "/login")
+    @PostMapping("/login")
     public String loginSuccess(Model model) {
         User currentUser = userService.getCurrentUser();
         userService.addBasicAttributes(model);
@@ -47,7 +60,7 @@ public class AppController {
 
     @GetMapping("/registration")
     public String registrationPage() {
-        return "registration";
+        return "pre/registration";
     }
 
     @PostMapping("/registration")
@@ -65,7 +78,7 @@ public class AppController {
                     + username + " уже существует!");
         }
 
-        return "registration";
+        return "pre/registration";
     }
 
     @GetMapping("/settings")

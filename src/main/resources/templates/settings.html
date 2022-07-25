@@ -16,7 +16,7 @@
 <div id="header"></div>
 <header>
     <div class="logo">
-        <a href="/"><img src="/img/logo.png"></a>
+        <a th:href="'/' + ${currentUser.position}" href="/"><img src="/img/logo.png"></a>
     </div>
     <div class="nav-menu">
         <nav class="nav-menu">

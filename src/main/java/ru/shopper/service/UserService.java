@@ -124,7 +124,7 @@ public class UserService {
         fields.put("firstname", currentUser.getFirstname());
         fields.put("lastname", currentUser.getLastname());
         fields.put("imgPath", currentUser.getImagePath());
-        fields.put("position", currentUser.getPosition().getDescription());
+        fields.put("position", currentUser.getPosition().getName());
         fields.put("birthdate", currentUser.getBirthdate() == null ? "" : currentUser.getBirthdate().toString());
         fields.put("active", Boolean.toString(currentUser.isActive()));
 

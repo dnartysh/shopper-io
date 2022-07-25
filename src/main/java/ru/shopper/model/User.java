@@ -47,6 +47,10 @@ public class User {
     @NotNull
     private LocalDate registrationDate;
 
+    @Column(name = "last_visit", columnDefinition = "DATE")
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    private LocalDate lastVisit;
+
     private boolean active;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
