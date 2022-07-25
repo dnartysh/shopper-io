@@ -154,23 +154,16 @@ public class UserService {
         }
     }
 
-    public void updateUser(String firstname, String lastname, LocalDate birthdate) {
+    public void updateCurrentUser(String firstname, String lastname, LocalDate birthdate, String password) {
         User user = getCurrentUser();
 
         user.setFirstname(firstname);
         user.setLastname(lastname);
         user.setBirthdate(birthdate);
 
-        userRepository.save(user);
-    }
-
-    public void updateUser(String firstname, String lastname, LocalDate birthdate, String password) {
-        User user = getCurrentUser();
-
-        user.setFirstname(firstname);
-        user.setLastname(lastname);
-        user.setBirthdate(birthdate);
-        user.setPassword(bCryptPasswordEncoder.encode(password));
+        if (password != null) {
+            user.setPassword(bCryptPasswordEncoder.encode(password));
+        }
 
         userRepository.save(user);
     }

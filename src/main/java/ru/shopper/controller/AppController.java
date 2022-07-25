@@ -76,30 +76,26 @@ public class AppController {
     }
 
     @PostMapping("/settings")
-    public String updateUser(@RequestParam(required = false) MultipartFile file,
-                              @RequestParam(required = false) boolean toDelete,
-                              @RequestParam(required = false) String firstname,
-                              @RequestParam(required = false) String lastname,
-                              @RequestParam(required = false) String password,
-                              @RequestParam(required = false)
-                                  @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate birthdate,
-                              Model model) throws IOException {
+    public String updateUser(Model model,
+                             @RequestParam(required = false) MultipartFile file,
+                             @RequestParam(required = false) boolean toPhotoDelete,
+                             @RequestParam(required = false) String firstname,
+                             @RequestParam(required = false) String lastname,
+                             @RequestParam(required = false) String password,
+                             @RequestParam(required = false)
+                                 @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate birthdate) throws IOException {
         userService.addBasicAttributes(model);
 
         if (file != null) {
             userService.uploadUserPhoto(file);
         }
 
-        if (toDelete) {
+        if (toPhotoDelete) {
             userService.removeUserPhoto();
         }
 
-        if (firstname != null | lastname != null | birthdate != null) {
-            if (password != null) {
-                userService.updateUser(firstname, lastname, birthdate, password);
-            } else {
-                userService.updateUser(firstname, lastname, birthdate);
-            }
+        if (firstname != null | lastname != null | birthdate != null | password != null) {
+            userService.updateCurrentUser(firstname, lastname, birthdate, password);
         }
 
         return "settings";
