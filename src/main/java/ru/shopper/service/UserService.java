@@ -161,7 +161,7 @@ public class UserService {
         user.setLastname(lastname);
         user.setBirthdate(birthdate);
 
-        if (password != null) {
+        if (!"".equals(password)) {
             user.setPassword(bCryptPasswordEncoder.encode(password));
         }
 

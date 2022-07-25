@@ -648,6 +648,7 @@ label {
 }
 
 .popup-content .p-modal, .warning-content .p-modal {
+    font-weight: bold;
     text-align: center;
     font-size: 18px;
 }
