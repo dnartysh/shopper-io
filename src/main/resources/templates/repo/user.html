@@ -87,26 +87,26 @@
 <label for="popup" class="popup-bg"></label>
 <div class="popup-content">
     <article class="popup-header">
-        <p id="popup-header-text" class="p-modal"></p>
+        <p id="popup-header-text" class="p-modal m-b-15"></p>
     </article>
 
     <article class="popup-body">
         <div class="info flex-row">
             <div>
-                <p>Логин: </p>
-                <p>Имя: </p>
-                <p>Фамилия: </p>
+                <p>Логин: <font color="red">*</font></p>
+                <p>Имя: <font color="red">*</font></p>
+                <p>Фамилия: <font color="red">*</font></p>
                 <p>Новый пароль: </p>
                 <p>Повторите пароль: </p>
-                <p>Должность: </p>
+                <p>Должность: <font color="red">*</font></p>
                 <p>Дата рождения: </p>
                 <p>Включен: </p>
             </div>
             <div>
-                <form class="m-l-30" id="save-user" method="post" action="/admin/user" onsubmit="location.reload()">
-                    <input id="user-username" type="text" name="username" placeholder="Логин">
-                    <input id="user-firstname" type="text" name="firstname" placeholder="Имя">
-                    <input id="user-lastname" type="text" name="lastname" placeholder="Фамилия">
+                <form class="m-l-30" id="save-user" method="post" action="/admin/user">
+                    <input required id="user-username" type="text" name="username" placeholder="Логин">
+                    <input required id="user-firstname" type="text" name="firstname" placeholder="Имя">
+                    <input required id="user-lastname" type="text" name="lastname" placeholder="Фамилия">
                     <input id="new-pass" type="password" name="password" placeholder="Новый пароль">
                     <input id="new-pass-checked" type="password" placeholder="Повторите пароль">
                     <select id="position" name="position">
@@ -124,6 +124,7 @@
     </article>
 
     <footer>
+        <p class="p-r-140"><font color="red">*</font> - поля, обязательные к заполнению</p>
         <label class="button success" for="save-user" onclick="checkPassword() ?
         submitData('save-user') : showErrorPopup('Ошибка!', 'Неверно введен пароль!')">Сохранить</label>
         <label for="popup" class="button close">Закрыть</label>

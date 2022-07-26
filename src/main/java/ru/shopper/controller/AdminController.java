@@ -24,7 +24,7 @@ public class AdminController {
     }
 
     @GetMapping
-    public String adminPage(Model model) {
+    public String getAdminPage(Model model) {
         userService.addBasicAttributes(model);
 
         return "account/admin";

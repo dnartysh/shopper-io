@@ -20,6 +20,13 @@ public class StorekeeperController {
         this.storekeeperService = storekeeperService;
     }
 
+    @GetMapping
+    public String getStorekeeperPage(Model model) {
+        userService.addBasicAttributes(model);
+
+        return "account/storekeeper";
+    }
+
     @GetMapping("/storage")
     public String getStoragePage(Model model) {
         userService.addBasicAttributes(model);

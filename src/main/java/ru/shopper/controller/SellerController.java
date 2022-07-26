@@ -20,6 +20,13 @@ public class SellerController {
         this.sellerService = sellerService;
     }
 
+    @GetMapping
+    public String getSellerPage(Model model) {
+        userService.addBasicAttributes(model);
+
+        return "account/seller";
+    }
+
     @GetMapping("/shop")
     public String getShopPage(Model model) {
         userService.addBasicAttributes(model);

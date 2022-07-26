@@ -31,15 +31,14 @@ if (positionCookie === "admin") {
         data: {
             menus: [{name: 'Товары', url: '/manager/product'},
                 {name: 'Заказы', url: '/manager/order'},
-                {name: 'Магазины', url: '/manager/shop'},
-                {name: 'Пользователи', url: '/manager/user'}]
+                {name: 'Магазины', url: '/manager/shop'}]
         }
     })
 } else if (positionCookie === "newcomer") {
     var menus = new Vue({
         el: '#nav-list',
         data: {
-            menus: [{name: 'Главная', url: '/'}]
+            menus: [{name: 'Главная', url: '/newcomer'}]
         }
     })
 }
@@ -94,10 +93,6 @@ function showErrorPopup(headerMessage, bodyMessage) {
     var header = document.getElementById('warning-popup-header');
     var bodyImg = document.getElementById('warning-popup-body-img');
     var body = document.getElementById('warning-popup-body');
-
-    // var content = document.getElementsByName('warning-content');
-
-    // content.style.zIndex = '300';
 
     bodyImg.src = "/img/error.png";
     header.innerHTML = headerMessage;

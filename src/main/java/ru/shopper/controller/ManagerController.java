@@ -1,6 +1,7 @@
 package ru.shopper.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +19,13 @@ public class ManagerController {
     public ManagerController(UserService userService, ManagerService managerService) {
         this.userService = userService;
         this.managerService = managerService;
+    }
+
+    @GetMapping
+    public String getManagerPage(Model model) {
+        userService.addBasicAttributes(model);
+
+        return "account/manager";
     }
 
     @GetMapping("/product")
@@ -39,13 +47,5 @@ public class ManagerController {
         userService.addBasicAttributes(model);
 
         return "repo/shop";
-    }
-
-    @GetMapping("/user")
-    public String getUserPage(Model model) {
-        userService.addBasicAttributes(model);
-        model.addAttribute("users", userService.getAllUsers());
-
-        return "repo/user";
     }
 }
