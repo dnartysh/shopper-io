@@ -12,6 +12,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.LocalDate;
 
 @Component
 public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
@@ -32,5 +33,13 @@ public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessH
         response.addCookie(userIdCookie);
 
         super.onAuthenticationSuccess(request, response, authentication);
+
+        updateUserVisitDate(currentUser);
+    }
+
+    private void updateUserVisitDate(User user) {
+        if (!user.isFirstLogin()) {
+            user.setLastVisit(LocalDate.now());
+        }
     }
 }

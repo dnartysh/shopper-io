@@ -16,7 +16,7 @@
 <div id="header"></div>
 <header>
     <div class="logo">
-        <a th:href="'/' + ${currentUser.position}" href="/"><img src="/img/logo.png"></a>
+        <a th:href="'/' + ${user.position.name}" href="/"><img src="/img/logo.png"></a>
     </div>
     <div class="nav-menu">
         <nav class="nav-menu">
@@ -30,11 +30,11 @@
     <div class="header-menu">
         <nav>
             <ul>
-                <div class="user-avatar-header" th:switch="${currentUser.imgPath}">
+                <div class="user-avatar-header" th:switch="${user.imagePath}">
                     <img th:case="''" th:src="'/data/upload/img/user/user-not-found.png'">
-                    <img th:case="*" th:src="${currentUser.imgPath}" onchange="location.reload()">
+                    <img th:case="*" th:src="${user.imagePath}" onchange="location.reload()">
                 </div>
-                <li><a href="/settings" th:text="${currentUser.firstname} + ' ' + ${currentUser.lastname}"></a></li>
+                <li><a href="/settings" th:text="${user.firstname} + ' ' + ${user.lastname}"></a></li>
                 <li><a href="/logout">Выйти</a></li>
             </ul>
         </nav>
@@ -46,9 +46,9 @@
     <div class="wrap-user-setting-content">
         <div class="user-setting-body">
             <div class="photo">
-                <div th:switch="${currentUser.imgPath}">
+                <div th:switch="${user.imagePath}">
                     <img th:case="''" th:src="'/data/upload/img/user/user-not-found.png'" class="photo">
-                    <img th:case="*" th:src="${currentUser.imgPath}" class="photo">
+                    <img th:case="*" th:src="${user.imagePath}" class="photo">
                 </div>
             </div>
             <div class="info">
@@ -61,9 +61,9 @@
                 </div>
                 <div>
                     <form id="save" method="post" action="/settings" onsubmit="location.reload()">
-                        <input type="text" name="firstname" placeholder="Фамилия" th:value="${currentUser.firstname}">
-                        <input type="text" name="lastname" placeholder="Имя" th:value="${currentUser.lastname}">
-                        <input type="date" name="birthdate" placeholder="Дата рождения" th:value="*{currentUser.birthdate}">
+                        <input type="text" name="firstname" placeholder="Фамилия" th:value="${user.firstname}">
+                        <input type="text" name="lastname" placeholder="Имя" th:value="${user.lastname}">
+                        <input type="date" name="birthdate" placeholder="Дата рождения" th:value="*{user.birthdate}">
                         <input type="password" id="new-pass" name="password" placeholder="Новый пароль">
                         <input type="password" id="new-pass-checked" placeholder="Повторите пароль">
                     </form>
@@ -103,5 +103,6 @@
 </div>
 
 <script src="/js/main.js"></script>
+<script src="/js/popup.js"></script>
 <script src="/js/security.js"></script>
 </body>

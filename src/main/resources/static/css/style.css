@@ -48,7 +48,7 @@ p {
     font-family: "Inter Semi Bold", Arial, Helvetica, sans-serif;
     font-size: 16px;
     line-height: 2.3;
-    color: #666666;
+    color: #0a0a0b;
     margin: 0px;
 }
 
@@ -595,6 +595,7 @@ table tbody tr td:last-child {
 }
 
 label {
+    font-weight: bold;
     cursor: pointer;
 }
 
@@ -910,17 +911,17 @@ label {
 
 .welcome-content {
     width: 100%;
-    margin-top: 4.5%;
+    margin-top: 3%;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    padding: 15px;
+    padding: 10px;
 }
 
 .wrap-welcome-content {
     min-width: 50%;
-    max-width: 50%;
+    max-width: 60%;
     background: #fff;
     overflow: hidden;
     text-align: center;
@@ -930,7 +931,7 @@ label {
     display: -ms-flexbox;
     display: flex;
     flex-direction: column;
-    padding: 5% 7% 5% 7%;
+    padding: 1% 7% 3% 7%;
     border-radius: 16px;
     box-shadow: 1px 20px 40px #777;
 }

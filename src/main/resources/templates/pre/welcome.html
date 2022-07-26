@@ -13,17 +13,66 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
 </head>
 <body>
+<input type="checkbox" id="warning-popup">
+<label for="warning-popup" class="popup-bg"></label>
 
 <div class="welcome-content">
     <div class="wrap-welcome-content">
-        <span class="fs-36 m-t-50 m-b-120" th:text="'Добро пожаловать, ' + ${currentUser.firstname} + '!'"></span>
-        <div class="p-l-100 p-r-100">
-            <a th:href="'/' + ${currentUser.position}"><label class="button-yellow fs-18">Начать работу</label></a>
+        <span class="fs-36 m-t-50 m-b-20" th:text="'Добро пожаловать, ' + ${user.firstname} + '!'"></span>
+        <div class="wrap-welcome-content-body">
+            <div th:switch="${user.firstLogin}">
+                <div th:case="true">
+                    <p class="fs-19 m-b-20">Это Ваш первый вход в систему. Пожалуйста, придумайте пароль.
+                        <br>Он будет использоваться для входа в систему</p>
+                    <form id="save-pass" method="post" action="/welcome">
+                        <div class="flex-row justify-c-c">
+                            <div class="m-r-20" align="left">
+                                <p class="fs-16 m-b-8">Пароль:</p>
+                                <p class="fs-16">Повторите пароль:</p>
+                            </div>
+                            <div class="m-l-20">
+                                <input id="new-pass" class="m-b-8 text-center" type="password" name="password" placeholder="Новый пароль">
+                                <input id="new-pass-checked" class="text-center" type="password" placeholder="Повторите пароль">
+                            </div>
+                        </div>
+                    </form>
+
+                    <div class="p-l-100 p-r-100 m-t-40 flex">
+                        <label class="button-yellow fs-18" for="save-pass" onclick="checkPasswordAndFieldsFullness() ?
+        submitData('save-pass') : showErrorPopup('Ошибка!', 'Неверно введен пароль!')">Сохранить пароль</label>
+                    </div>
+
+                </div>
+                <div th:case="*">
+                    <p class="fs-20 m-b-40">Последний вход в систему был осуществлен 21-08-2021 в 21:05 (IP:
+                        109.230.10.98)</p>
+                    <div class="p-l-100 p-r-100 m-t-40 flex">
+                        <a th:href="'/' + ${user.position.name}" class="button-yellow fs-18">Начать работу</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="p-l-100 p-r-100 m-t-10 flex">
+            <a th:href="'/logout'"><label class="fs-14">Войти в другой аккаунт</label></a>
         </div>
     </div>
 </div>
 
+<div class="warning-content">
+    <article class="popup-header">
+        <p id="warning-popup-header" class="p-modal"></p>
+    </article>
+    <article class="popup-body">
+        <img id="warning-popup-body-img" class="p-modal">
+        <p id="warning-popup-body" class="p-modal"></p>
+    </article>
+    <footer>
+        <label for="warning-popup" class="button close">Закрыть</label>
+    </footer>
+</div>
 
 <script src="/js/main.js"></script>
+<script src="/js/popup.js"></script>
+<script src="/js/security.js"></script>
 </body>
 </html>

@@ -114,23 +114,6 @@ public class UserService {
                 (SecurityContextHolder.getContext().getAuthentication().getName());
     }
 
-    public Map<String, String> getSimpleFieldsForCurrentUser() {
-        Map<String, String> fields = new HashMap<>();
-
-        User currentUser = getCurrentUser();
-
-        fields.put("id", String.valueOf(currentUser.getId()));
-        fields.put("username", currentUser.getUsername());
-        fields.put("firstname", currentUser.getFirstname());
-        fields.put("lastname", currentUser.getLastname());
-        fields.put("imgPath", currentUser.getImagePath());
-        fields.put("position", currentUser.getPosition().getName());
-        fields.put("birthdate", currentUser.getBirthdate() == null ? "" : currentUser.getBirthdate().toString());
-        fields.put("active", Boolean.toString(currentUser.isActive()));
-
-        return fields;
-    }
-
     public void uploadUserPhoto(MultipartFile file) throws IOException {
         User currentUser = getCurrentUser();
         String imgName = currentUser.getId() + ".png";
@@ -168,6 +151,21 @@ public class UserService {
         userRepository.save(user);
     }
 
+    public void updateCurrentUser(String password) {
+        User user = getCurrentUser();
+
+        if (user.isFirstLogin()) {
+            user.setFirstLogin(false);
+            user.setLastVisit(LocalDate.now());
+        }
+
+        if (!"".equals(password)) {
+            user.setPassword(bCryptPasswordEncoder.encode(password));
+        }
+
+        userRepository.save(user);
+    }
+
     public void updateUser(String username, String firstname, String lastname, LocalDate birthdate,
                            String password, boolean active) throws UserNotFoundException {
         User user = userRepository.findByUsername(username);
@@ -195,6 +193,6 @@ public class UserService {
     }
 
     public void addBasicAttributes(Model model) {
-        model.addAttribute("currentUser", getSimpleFieldsForCurrentUser());
+        model.addAttribute("user", getCurrentUser());
     }
 }

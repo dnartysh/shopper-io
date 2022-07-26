@@ -16,7 +16,7 @@
 <body>
 <header>
     <div class="logo">
-        <a th:href="'/' + ${currentUser.position}"><img src="/img/logo.png"></a>
+        <a th:href="'/' + ${user.position.name}"><img src="/img/logo.png"></a>
     </div>
     <div class="nav-menu">
         <nav class="nav-menu">
@@ -30,11 +30,11 @@
     <div class="header-menu">
         <nav>
             <ul>
-                <div class="user-avatar-header" th:switch="${currentUser.imgPath}">
+                <div class="user-avatar-header" th:switch="${user.imagePath}">
                     <img th:case="''" th:src="'/data/upload/img/user/user-not-found.png'">
-                    <img th:case="*" th:src="${currentUser.imgPath}" onchange="location.reload()">
+                    <img th:case="*" th:src="${user.imagePath}" onchange="location.reload()">
                 </div>
-                <li><a href="/settings" th:text="${currentUser.firstname} + ' ' + ${currentUser.lastname}"></a></li>
+                <li><a href="/settings" th:text="${user.firstname} + ' ' + ${user.lastname}"></a></li>
                 <li><a href="/logout">Выйти</a></li>
             </ul>
         </nav>

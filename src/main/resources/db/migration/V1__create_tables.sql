@@ -8,7 +8,8 @@ create table users
     image_path varchar(255),
     birthdate date,
     registration_date date not null,
-    last_visit date,
+    last_visit datetime,
+    first_login boolean,
     active boolean,
     position_id int not null
 );

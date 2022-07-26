@@ -47,9 +47,12 @@ public class User {
     @NotNull
     private LocalDate registrationDate;
 
-    @Column(name = "last_visit", columnDefinition = "DATE")
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @Column(name = "last_visit", columnDefinition = "DATETIME")
+    @DateTimeFormat(pattern = "dd.MM.yyyy HH:mm:ss")
     private LocalDate lastVisit;
+
+    @Column(name = "first_login")
+    private boolean firstLogin;
 
     private boolean active;
 

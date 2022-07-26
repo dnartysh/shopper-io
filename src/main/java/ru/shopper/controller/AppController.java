@@ -45,6 +45,15 @@ public class AppController {
         return "pre/welcome";
     }
 
+    @PostMapping("/welcome")
+    public String addUserPassword(Model model,
+                                  @RequestParam String password) {
+        userService.addBasicAttributes(model);
+        userService.updateCurrentUser(password);
+
+        return "pre/welcome";
+    }
+
     @GetMapping("/login")
     public String loginPage() {
         return "pre/login";
@@ -52,10 +61,9 @@ public class AppController {
 
     @PostMapping("/login")
     public String loginSuccess(Model model) {
-        User currentUser = userService.getCurrentUser();
         userService.addBasicAttributes(model);
 
-        return "account/" + currentUser.getPosition().getName();
+        return "pre/welcome";
     }
 
     @GetMapping("/registration")

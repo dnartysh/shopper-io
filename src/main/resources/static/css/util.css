@@ -202,6 +202,11 @@
 .fs-199 {font-size: 199px;}
 .fs-200 {font-size: 200px;}
 
+/*[ FONT WEIGHT ]
+///////////////////////////////////////////////////////////
+*/
+.fw-bold {font-weight: bold}
+
 /*[ PADDING ]
 ///////////////////////////////////////////////////////////
 */
@@ -2900,6 +2905,12 @@
 	align-items: stretch;
 }
 
+/*[ JUSTIFY ]
+///////////////////////////////////////////////////////////
+*/
+.justify-c-c {justify-content: center}
+.justify-c-f-s {justify-content: flex-start}
+.justify-c-f-e {justify-content: flex-end}
 
 /*[ Absolute ]
 -----------------------------------------------------------
