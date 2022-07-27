@@ -31,7 +31,7 @@
         <nav>
             <ul>
                 <div class="user-avatar-header" th:switch="${user.imagePath}">
-                    <img th:case="''" th:src="'/data/upload/img/user/user-not-found.png'">
+                    <img th:case="null" th:src="'/data/upload/img/user/user-not-found.png'">
                     <img th:case="*" th:src="${user.imagePath}" onchange="location.reload()">
                 </div>
                 <li><a href="/settings" th:text="${user.firstname} + ' ' + ${user.lastname}"></a></li>
@@ -45,8 +45,8 @@
         <table id="users-table">
             <caption>
                 <div class="table-user-caption">
-                    <h1>Список пользователей</h1>
-                    <input id="search-text" class="input-search-table" placeholder="Поиск" type="text" onkeyup="tableSearch()"/>
+                    <h1 class="m-t-5 m-l-5">Список пользователей</h1>
+                    <input id="search-text" class="max-w-30" placeholder="Поиск" type="text" onkeyup="tableSearch()"/>
                     <label class="button-yellow button-table" for="popup" onclick="clearUserFields()">Добавить</label>
                 </div>
             </caption>
@@ -85,6 +85,7 @@
 <input type="checkbox" id="popup"/>
 <input type="checkbox" id="warning-popup">
 <label for="popup" class="popup-bg"></label>
+<label for="warning-popup" class="warning-popup-bg"></label>
 <div class="popup-content">
     <article class="popup-header">
         <p id="popup-header-text" class="p-modal m-b-15"></p>
@@ -124,10 +125,10 @@
     </article>
 
     <footer>
-        <p class="p-r-140"><font color="red">*</font> - поля, обязательные к заполнению</p>
+        <p class="fs-13 p-r-40"><font color="red">*</font> - поля, обязательные к заполнению</p>
         <label class="button success" for="save-user" onclick="checkPassword() ?
         submitData('save-user') : showErrorPopup('Ошибка!', 'Неверно введен пароль!')">Сохранить</label>
-        <label for="popup" class="button close">Закрыть</label>
+        <label class="button close" for="popup">Закрыть</label>
     </footer>
 </div>
 

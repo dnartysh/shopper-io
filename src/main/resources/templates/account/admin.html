@@ -31,7 +31,7 @@
         <nav>
             <ul>
                 <div class="user-avatar-header" th:switch="${user.imagePath}">
-                    <img th:case="''" th:src="'/data/upload/img/user/user-not-found.png'">
+                    <img th:case="null" th:src="'/data/upload/img/user/user-not-found.png'">
                     <img th:case="*" th:src="${user.imagePath}" onchange="location.reload()">
                 </div>
                 <li><a href="/settings" th:text="${user.firstname} + ' ' + ${user.lastname}"></a></li>

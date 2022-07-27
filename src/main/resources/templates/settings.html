@@ -31,7 +31,7 @@
         <nav>
             <ul>
                 <div class="user-avatar-header" th:switch="${user.imagePath}">
-                    <img th:case="''" th:src="'/data/upload/img/user/user-not-found.png'">
+                    <img th:case="null" th:src="'/data/upload/img/user/user-not-found.png'">
                     <img th:case="*" th:src="${user.imagePath}" onchange="location.reload()">
                 </div>
                 <li><a href="/settings" th:text="${user.firstname} + ' ' + ${user.lastname}"></a></li>
@@ -41,13 +41,13 @@
     </div>
 </header>
 <input type="checkbox" id="warning-popup">
-<label for="warning-popup" class="popup-bg"></label>
+<label for="warning-popup" class="warning-popup-bg"></label>
 <div class="user-setting-content">
     <div class="wrap-user-setting-content">
         <div class="user-setting-body">
             <div class="photo">
                 <div th:switch="${user.imagePath}">
-                    <img th:case="''" th:src="'/data/upload/img/user/user-not-found.png'" class="photo">
+                    <img th:case="null" th:src="'/data/upload/img/user/user-not-found.png'" class="photo">
                     <img th:case="*" th:src="${user.imagePath}" class="photo">
                 </div>
             </div>

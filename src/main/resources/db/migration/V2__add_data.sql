@@ -35,11 +35,11 @@ insert into shopper.shop_products (id, shop_id, product_id, count) values
 
 insert into shopper.users (id, username, password, firstname, lastname, image_path, birthdate,
                            registration_date, last_visit, first_login, active, position_id) values
-(1, 'admin', '$2a$04$DF55XBZdXgb2b3v0hjNjRulWKSvB/9sK6qh3laDqt68e7p4X8W.sC', 'Denis', 'Ivanov', '', '1993-01-01', '2022-01-01', null, 1, 1, 4),
-(2, 'seller', '$2a$10$egI039xq/glHkdRIJMS4I.5NHPMZpNe3ZaOtmcwoqf1V3eWTtjycy', 'Masha', 'Petrova', '', null, '2022-02-12', null, 1, 1, 1),
-(3, 'storekeeper', '$2a$10$iJDels8.H06Iajy3WEUYx.Mfzb4O3SJ4hSrHai6Uoi8ZJV7IQJUC2', 'Petya', 'Smirnov', '', '1995-05-09', '2021-08-22', null, 1, 1, 3),
-(4, 'manager', '$2a$10$7QA8U7Fr2oZ.zGj2GdEYR.X/djyoTmKq6GDjq5rW/FHyRmr11cX4e', 'Victoria', 'Vasileva', '', null, '2021-08-22', null, 1, 1, 2),
-(5, 'newcomer', '$2a$10$iJDels8.H06Iajy3WEUYx.Mfzb4O3SJ4hSrHai6Uoi8ZJV7IQJUC2', 'Petr', 'Yashin', '', null, '2021-03-21', null, 1, 1, 5);
+(1, 'admin', '$2a$04$DF55XBZdXgb2b3v0hjNjRulWKSvB/9sK6qh3laDqt68e7p4X8W.sC', 'Denis', 'Ivanov', null, '1993-01-01', '2022-01-01', null, 1, 1, 4),
+(2, 'seller', '$2a$10$egI039xq/glHkdRIJMS4I.5NHPMZpNe3ZaOtmcwoqf1V3eWTtjycy', 'Masha', 'Petrova', null, null, '2022-02-12', null, 1, 1, 1),
+(3, 'storekeeper', '$2a$10$iJDels8.H06Iajy3WEUYx.Mfzb4O3SJ4hSrHai6Uoi8ZJV7IQJUC2', 'Petya', 'Smirnov', null, '1995-05-09', '2021-08-22', null, 1, 1, 3),
+(4, 'manager', '$2a$10$7QA8U7Fr2oZ.zGj2GdEYR.X/djyoTmKq6GDjq5rW/FHyRmr11cX4e', 'Victoria', 'Vasileva', null, null, '2021-08-22', null, 1, 1, 2),
+(5, 'newcomer', '$2a$10$iJDels8.H06Iajy3WEUYx.Mfzb4O3SJ4hSrHai6Uoi8ZJV7IQJUC2', 'Petr', 'Yashin', null, null, '2021-03-21', null, 1, 1, 5);
 
 insert into shopper.user_roles (id, user_id, role_id) values
 (1, 1, 1),

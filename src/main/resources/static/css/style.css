@@ -546,12 +546,12 @@ table thead th {
     text-align: left;
     border: none;
     padding: 10px 15px;
-    background: #d8d8d8;
+    background-color: white;
     font-size: 14px;
 }
 
 table caption {
-    background: #c5c8cc;
+    background-color: white;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     padding: 10px;
@@ -563,11 +563,11 @@ table caption {
 }
 
 table thead tr th:first-child {
-    border-radius: 8px 0 0 8px;
+    background-color: white;
 }
 
 table thead tr th:last-child {
-    border-radius: 0 8px 8px 0;
+    background-color: white;
 }
 
 table tbody td {
@@ -578,12 +578,12 @@ table tbody td {
     vertical-align: top;
 }
 
-table tbody tr:nth-child(even) {
-    background: #f3f3f3;
+table tbody tr {
+    background-color: white;
 }
 
 table tbody tr:hover {
-    background: #fccd36;
+    background-color: #fccd36;
 }
 
 table tbody tr td:first-child {
@@ -618,7 +618,7 @@ label {
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
 }
 
-.popup-bg {
+.popup-bg, .warning-popup-bg {
     position: absolute;
     pointer-events: none;
     top: 0;
@@ -635,10 +635,10 @@ label {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 50%;
+    width: 35%;
     height: auto;
-    margin-top: -18%;
-    margin-left: -25%;
+    margin-top: -20%;
+    margin-left: -20%;
     padding: 25px 15px 12px 25px;
     background-color: white;
     border-radius: 14px;
@@ -647,6 +647,14 @@ label {
     transition: transform 250ms ease;
     visibility: hidden;
     z-index: 20;
+}
+
+.warning-content {
+    width: 30%;
+    height: auto;
+    margin-top: -14%;
+    margin-left: -14%;
+    z-index: 30;
 }
 
 .popup-content .p-modal, .warning-content .p-modal {
@@ -767,7 +775,7 @@ label {
     z-index: 111;
 }
 
-#warning-popup:checked ~ .popup-bg {
+#warning-popup:checked ~ .warning-popup-bg {
     visibility: visible;
     background-color: black;
     opacity: 0.7;
@@ -887,7 +895,6 @@ label {
     max-width: 80%;
     border-radius: 16px;
     box-shadow: 1px 20px 40px #777;
-    padding-bottom: 10px;
 }
 
 .button-table {
@@ -899,10 +906,6 @@ label {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-}
-
-.input-search-table {
-    max-width: 30%;
 }
 
 #new-user-checkbox {
@@ -920,8 +923,8 @@ label {
 }
 
 .wrap-welcome-content {
-    min-width: 50%;
-    max-width: 60%;
+    min-width: 35%;
+    max-width: 45%;
     background: #fff;
     overflow: hidden;
     text-align: center;
