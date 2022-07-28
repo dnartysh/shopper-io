@@ -13,6 +13,10 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
+<script th:inline="javascript">
+    var firstLogin = /*[[${user.firstLogin}]]*/ null;
+    if (firstLogin) {window.location.href = 'http://' + window.location.host}
+</script>
 <body>
 <header>
     <div class="logo">
@@ -32,7 +36,7 @@
             <ul>
                 <div class="user-avatar-header" th:switch="${user.imagePath}">
                     <img th:case="null" th:src="'/data/upload/img/user/user-not-found.png'">
-                    <img th:case="*" th:src="${user.imagePath}" onchange="location.reload()">
+                    <img th:case="*" th:src="${user.imagePath}" onchange="window.location.reload()">
                 </div>
                 <li><a href="/settings" th:text="${user.firstname} + ' ' + ${user.lastname}"></a></li>
                 <li><a href="/logout">Выйти</a></li>

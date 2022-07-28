@@ -51,6 +51,7 @@ public class AdminController {
                            @RequestParam(defaultValue = "false") boolean isNew) throws Exception {
         userService.addBasicAttributes(model);
         model.addAttribute("users", userService.getAllUsers());
+        model.addAttribute("positions", userService.getPositions());
 
         if (isNew) {
             User user = userService.getUserByUsername(username);

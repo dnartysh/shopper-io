@@ -11,7 +11,8 @@ create table users
     last_visit datetime,
     first_login boolean,
     active boolean,
-    position_id int not null
+    position_id int not null,
+    ip_address varchar(15)
 );
 
 create table roles

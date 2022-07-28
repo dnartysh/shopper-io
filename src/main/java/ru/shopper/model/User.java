@@ -56,6 +56,9 @@ public class User {
 
     private boolean active;
 
+    @Column(name = "ip_address")
+    private String ipAddress;
+
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))

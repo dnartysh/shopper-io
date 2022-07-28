@@ -5,6 +5,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 import ru.shopper.model.User;
+import ru.shopper.repository.UserRepository;
 import ru.shopper.service.UserService;
 
 import javax.servlet.ServletException;
@@ -19,6 +20,9 @@ public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessH
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request,
@@ -35,11 +39,18 @@ public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessH
         super.onAuthenticationSuccess(request, response, authentication);
 
         updateUserVisitDate(currentUser);
+        updateUserIpAddress(currentUser, request.getRemoteAddr());
+
+        userRepository.save(currentUser);
     }
 
     private void updateUserVisitDate(User user) {
         if (!user.isFirstLogin()) {
             user.setLastVisit(LocalDate.now());
         }
+    }
+
+    private void updateUserIpAddress(User user, String ipAddress) {
+        user.setIpAddress(ipAddress);
     }
 }
