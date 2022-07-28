@@ -21,10 +21,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class UserService {
@@ -156,7 +155,7 @@ public class UserService {
 
         if (user.isFirstLogin()) {
             user.setFirstLogin(false);
-            user.setLastVisit(LocalDate.now());
+            user.setLastVisit(LocalDateTime.now());
         }
 
         if (!"".equals(password)) {

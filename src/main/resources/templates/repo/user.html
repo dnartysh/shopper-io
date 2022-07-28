@@ -15,7 +15,9 @@
 </head>
 <script th:inline="javascript">
     var firstLogin = /*[[${user.firstLogin}]]*/ null;
-    if (firstLogin) {window.location.href = 'http://' + window.location.host}
+    if (firstLogin) {
+        window.location.href = 'http://' + window.location.host
+    }
 </script>
 <body>
 <header>
@@ -131,18 +133,17 @@
     <footer>
         <p class="fs-13 p-r-40"><font color="red">*</font> - поля, обязательные к заполнению</p>
         <label class="button success" for="save-user" onclick="checkPassword() ?
-        submitData('save-user') : showErrorPopup('Ошибка!', 'Неверно введен пароль!')">Сохранить</label>
+        submitData('save-user') : showErrorPopup('Неверно введен пароль!')">Сохранить</label>
         <label class="button close" for="popup">Закрыть</label>
     </footer>
 </div>
 <div class="warning-content">
-    <article class="popup-header">
-        <p id="warning-popup-header" class="p-modal"></p>
-    </article>
-    <article class="popup-body">
+    <div class="warning-popup-body">
         <img id="warning-popup-body-img" class="p-modal">
-        <p id="warning-popup-body" class="p-modal"></p>
-    </article>
+        <article class="popup-body">
+            <p id="warning-popup-body-message" class="p-modal"></p>
+        </article>
+    </div>
     <footer>
         <label for="warning-popup" class="button close">Закрыть</label>
     </footer>

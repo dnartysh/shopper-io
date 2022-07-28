@@ -14,7 +14,7 @@
 </head>
 <body>
 <input type="checkbox" id="warning-popup">
-<label for="warning-popup" class="popup-bg"></label>
+<label for="warning-popup" class="warning-popup-bg"></label>
 <div class="welcome-content">
     <div class="wrap-welcome-content">
         <span class="fs-36 m-t-50 m-b-20" th:text="'Добро пожаловать, ' + ${user.firstname} + '!'"></span>
@@ -39,16 +39,12 @@
                     </form>
                     <div class="p-l-100 p-r-100 m-t-40 flex">
                         <label class="button-yellow fs-16" for="save-pass" onclick="checkPasswordAndFieldsFullness() ?
-        submitData('save-pass') : showErrorPopup('Ошибка!', 'Неверно введен пароль!')">Сохранить пароль</label>
+        submitData('save-pass') : showErrorPopup('Неверно введен пароль!')">Сохранить пароль</label>
                     </div>
                 </div>
                 <div th:case="*">
-                    <!--                    <p class="fs-20 m-b-40">Последний вход в систему был осуществлен 21-08-2021 в 21:05 (IP:-->
-                    <!--                        109.230.10.98)</p>-->
-
-                    <span class="fs-20 m-b-40" th:text="'Последний вход в систему был осуществлен ' + ${user.lastVisit} +
+                    <span class="fs-18 m-b-40" th:text="'Последний вход в систему был осуществлен ' + ${user.lastVisit} +
 ' (IP: ' + ${user.ipAddress} + ')'"></span>
-
                     <div class="p-l-100 p-r-100 m-t-40 flex">
                         <a th:href="'/' + ${user.position.name}" class="button-yellow fs-18">Начать работу</a>
                     </div>
@@ -61,13 +57,12 @@
     </div>
 </div>
 <div class="warning-content">
-    <article class="popup-header">
-        <p id="warning-popup-header" class="p-modal"></p>
-    </article>
-    <article class="popup-body">
+    <div class="warning-popup-body">
         <img id="warning-popup-body-img" class="p-modal">
-        <p id="warning-popup-body" class="p-modal"></p>
-    </article>
+        <article class="popup-body">
+            <p id="warning-popup-body-message" class="p-modal"></p>
+        </article>
+    </div>
     <footer>
         <label for="warning-popup" class="button close">Закрыть</label>
     </footer>

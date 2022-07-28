@@ -14,7 +14,9 @@
 </head>
 <script th:inline="javascript">
     var firstLogin = /*[[${user.firstLogin}]]*/ null;
-    if (firstLogin) {window.location.href = 'http://' + window.location.host}
+    if (firstLogin) {
+        window.location.href = 'http://' + window.location.host
+    }
 </script>
 <body>
 <div id="header"></div>
@@ -80,27 +82,26 @@
                        onchange="document.getElementById('upload').submit()"/>
                 <div class="flex-row">
                     <label class="button-grey m-r-7" for="user-photo">Загрузить</label>
-                    <input type="checkbox" id="checkbox-photo" name="toPhotoDelete" onchange="document.getElementById('upload').submit()"/>
+                    <input type="checkbox" id="checkbox-photo" name="toPhotoDelete"
+                           onchange="document.getElementById('upload').submit()"/>
                     <label class="button-grey m-l-7" for="checkbox-photo">Удалить</label>
                 </div>
             </form>
             <div>
                 <label class="button-yellow m-l-7" for="save"
                        onclick="checkPassword() ? submitData('save') :
-                       showErrorPopup('Ошибка!', 'Неправильно введен пароль')">Сохранить</label>
+                       showErrorPopup('Неправильно введен пароль')">Сохранить</label>
             </div>
         </footer>
     </div>
 </div>
-
 <div class="warning-content">
-    <article class="popup-header">
-        <p id="warning-popup-header" class="p-modal"></p>
-    </article>
-    <article class="popup-body">
+    <div class="warning-popup-body">
         <img id="warning-popup-body-img" class="p-modal">
-        <p id="warning-popup-body" class="p-modal"></p>
-    </article>
+        <article class="popup-body">
+            <p id="warning-popup-body-message" class="p-modal"></p>
+        </article>
+    </div>
     <footer>
         <label for="warning-popup" class="button close">Закрыть</label>
     </footer>
@@ -109,4 +110,11 @@
 <script src="/js/main.js"></script>
 <script src="/js/popup.js"></script>
 <script src="/js/security.js"></script>
+
+<script th:inline="javascript">
+    var success = /*[[${success}]]*/ null;
+    if (success) {
+        showSuccessPopup('Данные успешно обновлены!')
+    }
+</script>
 </body>

@@ -119,6 +119,8 @@ public class AppController {
             userService.updateCurrentUser(firstname, lastname, birthdate, password);
         }
 
+        model.addAttribute("success", true);
+
         return "settings";
     }
 }

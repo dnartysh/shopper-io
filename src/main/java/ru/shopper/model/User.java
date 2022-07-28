@@ -9,6 +9,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -49,7 +50,7 @@ public class User {
 
     @Column(name = "last_visit", columnDefinition = "DATETIME")
     @DateTimeFormat(pattern = "dd.MM.yyyy HH:mm:ss")
-    private LocalDate lastVisit;
+    private LocalDateTime lastVisit;
 
     @Column(name = "first_login")
     private boolean firstLogin;

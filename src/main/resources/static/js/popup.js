@@ -1,25 +1,21 @@
-function showSuccessPopup(headerMessage, bodyMessage) {
+function showSuccessPopup(message) {
     var check = document.getElementById('warning-popup');
-    var header = document.getElementById('warning-popup-header');
     var bodyImg = document.getElementById('warning-popup-body-img');
-    var body = document.getElementById('warning-popup-body');
+    var body = document.getElementById('warning-popup-body-message');
 
     bodyImg.src = "/img/success.png";
-    header.innerHTML = headerMessage;
-    body.innerHTML = bodyMessage;
+    body.innerHTML = message;
 
     check.checked = true;
 }
 
-function showErrorPopup(headerMessage, bodyMessage) {
+function showErrorPopup(message) {
     var check = document.getElementById('warning-popup');
-    var header = document.getElementById('warning-popup-header');
     var bodyImg = document.getElementById('warning-popup-body-img');
-    var body = document.getElementById('warning-popup-body');
+    var body = document.getElementById('warning-popup-body-message');
 
     bodyImg.src = "/img/error.png";
-    header.innerHTML = headerMessage;
-    body.innerHTML = bodyMessage;
+    body.innerHTML = message;
 
     check.checked = true;
 }
