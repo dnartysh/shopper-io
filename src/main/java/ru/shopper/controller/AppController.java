@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import ru.shopper.config.AppConstants;
 import ru.shopper.model.User;
 import ru.shopper.service.UserService;
 
@@ -81,9 +82,11 @@ public class AppController {
 
         if (user == null) {
             userService.createUser(username, firstname, lastname, password);
+            model.addAttribute("success", "Пользователь успешно зарегистрирован! " +
+                    "Используйте форму входа для авторизации");
         } else {
-            model.addAttribute("error", "Пользователь с логином - "
-                    + username + " уже существует!");
+            model.addAttribute("error", "Пользователь с логином '"
+                    + username + "' уже существует!");
         }
 
         return "pre/registration";
@@ -119,7 +122,7 @@ public class AppController {
             userService.updateCurrentUser(firstname, lastname, birthdate, password);
         }
 
-        model.addAttribute("success", true);
+        model.addAttribute("success", AppConstants.UPDATE_SUCCESS);
 
         return "settings";
     }

@@ -1,13 +1,31 @@
 function checkPassword() {
-    var pass = document.getElementById('new-pass').value;
-    var checkedPass = document.getElementById('new-pass-checked').value;
+    let pass = document.getElementById('new-pass').value;
+    let checkedPass = document.getElementById('new-pass-checked').value;
 
     return pass === checkedPass;
 }
 
 function checkPasswordAndFieldsFullness() {
-    var pass = document.getElementById('new-pass').value;
-    var checkedPass = document.getElementById('new-pass-checked').value;
+    let pass = document.getElementById('new-pass').value;
+    let checkedPass = document.getElementById('new-pass-checked').value;
 
     return pass === checkedPass && pass !== '' && checkedPass !== '';
+}
+
+function checkUsername() {
+    let username = document.getElementById('username').value;
+
+    return username !== '';
+}
+
+function checkFirstname() {
+    let firstname = document.getElementById('firstname').value;
+
+    return firstname !== '';
+}
+
+function checkLastname() {
+    let lastname = document.getElementById('lastname').value;
+
+    return lastname !== '';
 }
