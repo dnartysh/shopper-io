@@ -165,13 +165,10 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public void updateUser(String username, String firstname, String lastname, LocalDate birthdate,
+    public void updateUser(String username, String firstname, String lastname, String position, LocalDate birthdate,
                            String password, boolean active) throws UserNotFoundException {
         User user = userRepository.findByUsername(username);
-
-        if (user == null) {
-            throw new UserNotFoundException("Пользователь с логином - " + username + " не найден!");
-        }
+        Position userPosition = positionRepository.findByName(position);
 
         user.setUsername(username);
         user.setFirstname(firstname);
@@ -179,6 +176,10 @@ public class UserService {
         user.setBirthdate(birthdate);
         user.setActive(active);
         user.setPassword(bCryptPasswordEncoder.encode(password));
+
+        if (userPosition != null) {
+            user.setPosition(userPosition);
+        }
 
         userRepository.save(user);
     }

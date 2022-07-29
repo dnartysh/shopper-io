@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import ru.shopper.config.AppConstants;
 import ru.shopper.model.User;
 import ru.shopper.service.UserService;
 
@@ -53,17 +54,27 @@ public class AdminController {
         model.addAttribute("users", userService.getAllUsers());
         model.addAttribute("positions", userService.getPositions());
 
-        if (isNew) {
-            User user = userService.getUserByUsername(username);
+        User user = userService.getUserByUsername(username);
 
-            if (user == null) {
-                userService.createUser(username, firstname, lastname, password, position, birthdate, active);
-            } else {
-                model.addAttribute("error", "Пользователь с логином - "
-                        + username + " уже существует!");
+        if (isNew) {
+            if (user != null) {
+                model.addAttribute("error", "Пользователь с логином '"
+                        + username + "' уже существует!");
+
+                return "repo/user";
             }
+
+            userService.createUser(username, firstname, lastname, password, position, birthdate, active);
+            model.addAttribute("success", AppConstants.CREATE_SUCCESS);
         } else {
-            userService.updateUser(username, firstname, lastname, birthdate, password, active);
+            if (user == null) {
+                model.addAttribute("error", "Пользователь с логином '" + username + "' не найден!");
+
+                return "repo/user";
+            }
+
+            userService.updateUser(username, firstname, lastname, position, birthdate, password, active);
+            model.addAttribute("success", AppConstants.UPDATE_SUCCESS);
         }
 
         return "repo/user";

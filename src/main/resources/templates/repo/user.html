@@ -111,9 +111,9 @@
             </div>
             <div>
                 <form class="m-l-30" id="save-user" method="post" action="/admin/user">
-                    <input required id="user-username" type="text" name="username" placeholder="Логин">
-                    <input required id="user-firstname" type="text" name="firstname" placeholder="Имя">
-                    <input required id="user-lastname" type="text" name="lastname" placeholder="Фамилия">
+                    <input required id="username" type="text" name="username" placeholder="Логин">
+                    <input required id="firstname" type="text" name="firstname" placeholder="Имя">
+                    <input required id="lastname" type="text" name="lastname" placeholder="Фамилия">
                     <input id="new-pass" type="password" name="password" placeholder="Новый пароль">
                     <input id="new-pass-checked" type="password" placeholder="Повторите пароль">
                     <select id="position" name="position">
@@ -122,8 +122,8 @@
                                 th:text="${position.description}">
                         </option>
                     </select>
-                    <input id="user-birthdate" type="date" name="birthdate" placeholder="Дата рождения">
-                    <input id="user-active" type="checkbox" name="active" placeholder="Включен">
+                    <input id="birthdate" type="date" name="birthdate" placeholder="Дата рождения">
+                    <input id="active" type="checkbox" name="active" placeholder="Включен">
                     <input id="new-user-checkbox" type="checkbox" value="true" name="isNew">
                 </form>
             </div>
@@ -132,8 +132,9 @@
 
     <footer>
         <p class="fs-13 p-r-40"><font color="red">*</font> - поля, обязательные к заполнению</p>
-        <label class="button success" for="save-user" onclick="checkPassword() ?
-        submitData('save-user') : showErrorPopup('Неверно введен пароль!')">Сохранить</label>
+        <label class="button success" for="save-user" onclick="(checkPassword() && checkUsername() &&
+         checkFirstname() && checkLastname() && checkPosition()) ?
+        submitData('save-user') : showErrorPopup('Некорректно введен пароль, либо какие-то поля не заполнены!')">Сохранить</label>
         <label class="button close" for="popup">Закрыть</label>
     </footer>
 </div>
@@ -149,9 +150,20 @@
     </footer>
 </div>
 
-<script th:inline="javascript" src="/js/main.js"></script>
+<script src="/js/main.js"></script>
 <script src="/js/user.js"></script>
 <script src="/js/popup.js"></script>
 <script src="/js/security.js"></script>
+<script th:inline="javascript">
+    var success = /*[[${success}]]*/ null;
+    if (success) {
+        showSuccessPopup(success);
+    }
+
+    var error = /*[[${error}]]*/ null;
+    if (error) {
+        showErrorPopup(error);
+    }
+</script>
 </body>
 </html>

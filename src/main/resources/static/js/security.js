@@ -29,3 +29,9 @@ function checkLastname() {
 
     return lastname !== '';
 }
+
+function checkPosition() {
+    let position = document.getElementById('position').value;
+
+    return position !== '';
+}
