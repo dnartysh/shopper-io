@@ -14,7 +14,6 @@ import java.nio.file.StandardCopyOption;
 
 @Component
 public class AppConfig {
-
     @Value(("${shopper.user-img-path}"))
     private String userImgPath;
 

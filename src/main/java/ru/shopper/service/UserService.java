@@ -18,11 +18,13 @@ import ru.shopper.repository.RoleRepository;
 import ru.shopper.repository.UserRepository;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -190,6 +192,25 @@ public class UserService {
         positionRepository.findAll().forEach(positions::add);
 
         return positions;
+    }
+
+    public Collection<BigDecimal> getUsersCountByYear() {
+        Collection<BigDecimal> usersCount = new ArrayList<>();
+        usersCount.add(new BigDecimal(5));
+        usersCount.add(new BigDecimal(10));
+        usersCount.add(new BigDecimal(6));
+        usersCount.add(new BigDecimal(3));
+        usersCount.add(new BigDecimal(4));
+        usersCount.add(new BigDecimal(7));
+        usersCount.add(new BigDecimal(13));
+        usersCount.add(new BigDecimal(8));
+        usersCount.add(new BigDecimal(20));
+        usersCount.add(new BigDecimal(1));
+        usersCount.add(new BigDecimal(5));
+        usersCount.add(new BigDecimal(0));
+
+
+        return usersCount;
     }
 
     public void addBasicAttributes(Model model) {
