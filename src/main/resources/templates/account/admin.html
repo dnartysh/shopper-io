@@ -16,7 +16,9 @@
 </head>
 <script th:inline="javascript">
     var firstLogin = /*[[${user.firstLogin}]]*/ null;
-    if (firstLogin) {window.location.href = 'http://' + window.location.host}
+    if (firstLogin) {
+        window.location.href = 'http://' + window.location.host
+    }
 </script>
 <body>
 <header>
@@ -49,7 +51,9 @@
 <label for="popup" class="popup-bg"></label>
 
 <div class="new-user-chart">
-    <canvas id="new-users-chart"></canvas>
+    <div class="wrap-new-user-chart">
+        <canvas id="new-users-chart"></canvas>
+    </div>
 </div>
 
 <script src="/js/main.js"></script>
