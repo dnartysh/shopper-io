@@ -12,13 +12,13 @@ body {
     background-size: cover;
     color: #000;
     height: 100%;
-    font-family: "Inter Semi Bold", Arial, Helvetica, sans-serif;
+    font-family: "Noto Sans", Arial, Helvetica, sans-serif;
     font-size: 16px;
     line-height: 2em;
 }
 
 a {
-    font-family: "Inter Semi Bold", Arial, Helvetica, sans-serif;
+    font-family: "Noto Sans", Arial, Helvetica, sans-serif;
     font-size: 16px;
     font-weight: bold;
     line-height: 1.7;
@@ -41,15 +41,20 @@ a:hover {
 }
 
 h1, h2, h3, h4, h5, h6 {
-    margin: 0px;
-}
-
-p {
-    font-family: "Inter Semi Bold", Arial, Helvetica, sans-serif;
+    font-family: "Noto Sans", Arial, Helvetica, sans-serif;
     font-size: 16px;
     line-height: 2.3;
     color: #0a0a0b;
     margin: 0px;
+}
+
+p {
+    font-family: "Noto Sans", Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 2.5;
+    color: #0a0a0b;
+    margin: 3px;
 }
 
 ul, li {
@@ -907,7 +912,13 @@ label {
     min-width: 70%;
     max-width: 80%;
     border-radius: 16px;
-    box-shadow: 1px 20px 40px #777;
+    /*box-shadow: 1px 20px 40px #777;*/
+}
+
+.wrap-users-table {
+    background: white;
+    padding: 20px;
+    border-radius: 14px;
 }
 
 .button-table {
@@ -919,6 +930,8 @@ label {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    border: none;
+    background: white;
 }
 
 #new-user-checkbox {
@@ -953,14 +966,18 @@ label {
 }
 
 .new-user-chart {
-    width: 95%;
-    height: 95%;
+    width: 85%;
+    height: 100%;
     text-align: center;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    padding: 10px;
+    padding: 2% 0 2% 15%;
+}
+
+.new-user-chart canvas {
+    padding: 50px;
 }
 
 .new-user-chart .wrap-new-user-chart {
@@ -969,4 +986,23 @@ label {
     justify-content: center;
     background-color: white;
     border-radius: 14px;
+    padding: 10px;
+}
+
+.flex-content {
+    display: flex;
+    justify-content: space-evenly;
+    justify-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 4%;
+}
+
+.flex-content .wrap-flex-content-row {
+    width: 90%;
+    height: 300px;
+    background-color: white;
+    margin: 20px;
+    border-radius: 14px;
+    box-shadow: 1px 5px 10px #777;
 }

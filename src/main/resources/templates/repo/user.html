@@ -48,44 +48,48 @@
 </header>
 <div class="user-content">
     <div class="wrap-user-content">
-        <table id="users-table">
-            <caption>
-                <div class="table-user-caption">
-                    <h1 class="m-t-5 m-l-5">Список пользователей</h1>
-                    <input id="search-text" class="max-w-30" placeholder="Поиск" type="text" onkeyup="tableSearch()"/>
-                    <label class="button-yellow button-table" for="popup" onclick="clearUserFields()">Добавить</label>
-                </div>
-            </caption>
-            <thead>
-            <tr>
-                <th>ID</th>
-                <th>Логин</th>
-                <th>Имя</th>
-                <th>Фамилия</th>
-                <th>Должность</th>
-                <th>Дата рождения</th>
-                <th>Дата регистрации</th>
-                <th>Включен</th>
-                <th>Изменить</th>
-            </tr>
-            </thead>
-            <tbody>
-
-            <div th:each="user : ${users}">
+        <div class="wrap-users-table">
+            <table id="users-table">
+                <caption>
+                    <div class="table-user-caption">
+                        <h1 class="m-t-5 m-l-5">Список пользователей</h1>
+                        <input id="search-text" class="max-w-30" placeholder="Поиск" type="text"
+                               onkeyup="tableSearch()"/>
+                        <label class="button-yellow button-table" for="popup"
+                               onclick="clearUserFields()">Добавить</label>
+                    </div>
+                </caption>
+                <thead>
                 <tr>
-                    <td id="td-user-id" th:text="${user.id}"></td>
-                    <td id="td-user-username" th:text="${user.username}"></td>
-                    <td th:text="${user.firstname}"></td>
-                    <td th:text="${user.lastname}"></td>
-                    <td th:text="${user.position.name}"></td>
-                    <td th:text="${user.birthdate}"></td>
-                    <td th:text="${user.registrationDate}"></td>
-                    <td><input disabled type="checkbox" th:checked="${user.active}"/></td>
-                    <td><a href="#" onclick="fillUsersFields()"><label for="popup">Изменить</label></a></td>
+                    <th>ID</th>
+                    <th>Логин</th>
+                    <th>Имя</th>
+                    <th>Фамилия</th>
+                    <th>Должность</th>
+                    <th>Дата рождения</th>
+                    <th>Дата регистрации</th>
+                    <th>Включен</th>
+                    <th>Изменить</th>
                 </tr>
-            </div>
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+
+                <div th:each="user : ${users}">
+                    <tr>
+                        <td id="td-user-id" th:text="${user.id}"></td>
+                        <td id="td-user-username" th:text="${user.username}"></td>
+                        <td th:text="${user.firstname}"></td>
+                        <td th:text="${user.lastname}"></td>
+                        <td th:text="${user.position.name}"></td>
+                        <td th:text="${user.birthdate}"></td>
+                        <td th:text="${user.registrationDate}"></td>
+                        <td><input disabled type="checkbox" th:checked="${user.active}"/></td>
+                        <td><a href="#" onclick="fillUsersFields()"><label for="popup">Изменить</label></a></td>
+                    </tr>
+                </div>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 <input type="checkbox" id="popup"/>
@@ -100,14 +104,14 @@
     <article class="popup-body">
         <div class="info flex-row">
             <div>
-                <p>Логин: <font color="red">*</font></p>
-                <p>Имя: <font color="red">*</font></p>
-                <p>Фамилия: <font color="red">*</font></p>
-                <p>Новый пароль: </p>
-                <p>Повторите пароль: </p>
-                <p>Должность: <font color="red">*</font></p>
-                <p>Дата рождения: </p>
-                <p>Включен: </p>
+                <h1>Логин: <font color="red">*</font></h1>
+                <h1>Имя: <font color="red">*</font></h1>
+                <h1>Фамилия: <font color="red">*</font></h1>
+                <h1>Новый пароль: </h1>
+                <h1>Повторите пароль: </h1>
+                <h1>Должность: <font color="red">*</font></h1>
+                <h1>Дата рождения: </h1>
+                <h1>Включен: </h1>
             </div>
             <div>
                 <form class="m-l-30" id="save-user" method="post" action="/admin/user">
@@ -131,7 +135,7 @@
     </article>
 
     <footer>
-        <p class="fs-13 p-r-40"><font color="red">*</font> - поля, обязательные к заполнению</p>
+        <h1 class="fs-13 p-r-40"><font color="red">*</font> - поля, обязательные к заполнению</h1>
         <label class="button success" for="save-user" onclick="(checkPassword() && checkUsername() &&
          checkFirstname() && checkLastname() && checkPosition()) ?
         submitData('save-user') : showErrorPopup('Некорректно введен пароль, либо какие-то поля не заполнены!')">Сохранить</label>
