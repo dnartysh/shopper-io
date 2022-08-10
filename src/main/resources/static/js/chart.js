@@ -1,17 +1,19 @@
-function drawNewUsersChart() {
+var hostUrl = 'http://' + window.location.host;
+
+function drawAdminCharts() {
     $(document).ready(function () {
         $.ajax({
             type : 'GET',
-            url : 'api/chart/user',
+            url : hostUrl + '/api/chart/user',
             success : function(data) {
                 var config = {
-                    labels: ["January", "February", "April", "March", "August", "September"],
+                    labels: ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август",
+                        "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"],
                     series: [JSON.parse(data)]
                 };
 
                 var options = {
                     height: '550px',
-                    // fullWidth: true,
                     chartPadding: {
                         top: 20,
                         left: 10,
@@ -27,10 +29,59 @@ function drawNewUsersChart() {
                 new Chartist.Line('#chart-user', config, options);
             },
             error : function () {
-                console.log('Error load data in "api/chart/user"');
+                console.log('Error load data in "/api/chart/user"');
             }
         });
     })
 }
 
-// series: [[1, 5, 2, 10, 11, 1]]
+function drawStatisticCharts() {
+    $(document).ready(function () {
+        $.ajax({
+            type : 'GET',
+            url : hostUrl + '/api/chart/user/period',
+            success : function(data) {
+                var config = {
+                    labels: ["Админ", "Продавец", "Менеджер", "Кладовщик"],
+                    series: JSON.parse(data)
+                }
+
+                var options = {
+                    height: '270px',
+                    distributeSeries: true
+                }
+
+                new Chartist.Bar('#chart-user-by-position', config, options);
+            },
+            error : function () {
+                console.log('Error load data in "/api/chart/user/period"');
+            }
+        });
+
+        $.ajax({
+            type : 'GET',
+            url : hostUrl + '/api/chart/server/memory',
+            success : function(data) {
+                var sum = function(a, b) {
+                    return a + b;
+                };
+
+                var config = {
+                    series: [30, 70]
+                }
+
+                var options = {
+                    height: '270px',
+                    labelInterpolationFnc: function(value) {
+                        return Math.round(value / config.series.reduce(sum) * 100) + '%';
+                    }
+                }
+
+                new Chartist.Pie('#chart-memory-server', config, options);
+            },
+            error : function () {
+                console.log('Error load data in "/api/chart/server/memory"');
+            }
+        });
+    })
+}

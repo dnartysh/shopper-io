@@ -10,13 +10,19 @@
     <link rel="icon" href="/img/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css"/>
     <link rel="stylesheet" href="/css/util.css" media="screen" type="text/css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartist/0.11.4/chartist.js"></script>
+
 </head>
 <script th:inline="javascript">
     var firstLogin = /*[[${user.firstLogin}]]*/ null;
-    if (firstLogin) {window.location.href = 'http://' + window.location.host}
+    if (firstLogin) {
+        window.location.href = 'http://' + window.location.host
+    }
 </script>
-<body>
+<body onload="drawStatisticCharts()">
 <header>
     <div class="logo">
         <a th:href="'/' + ${user.position.name}" href="/"><img src="/img/logo.png"></a>
@@ -43,7 +49,56 @@
         </nav>
     </div>
 </header>
+<input type="checkbox" id="warning-popup">
+<label for="warning-popup" class="warning-popup-bg"></label>
+
+
+<div class="flex-content">
+    <div class="wrap-flex-content">
+        <div class="flex-content-row">
+            <div class="wrap-flex-content-row">
+                <p>Количество пользователей по должности</p>
+                <div id="chart-user-by-position" class="p-b-10"></div>
+                <h1 th:text="'Всего пользователей: ' + ${usersCount}"></h1>
+            </div>
+        </div>
+        <div class="flex-content-row">
+            <div class="wrap-flex-content-row">
+                <p>Память сервера</p>
+                <div id="chart-memory-server" class="p-b-10"></div>
+                <h1>Занято 1024/4096 серверной памяти</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="warning-content">
+    <div class="warning-popup-body">
+        <img id="warning-popup-body-img" class="p-modal">
+        <article class="popup-body">
+            <p id="warning-popup-body-message" class="p-modal"></p>
+        </article>
+    </div>
+    <footer>
+        <label for="warning-popup" class="button close">Закрыть</label>
+    </footer>
+</div>
 
 <script src="/js/main.js"></script>
+<script src="/js/popup.js"></script>
+<script src="/js/chart.js"></script>
+<script th:inline="javascript">
+    var success = /*[[${success}]]*/ null;
+    if (success) {
+        showSuccessPopup(success);
+    }
+
+    var error = /*[[${error}]]*/ null;
+    if (error) {
+        showErrorPopup(error);
+    }
+</script>
 </body>
 </html>

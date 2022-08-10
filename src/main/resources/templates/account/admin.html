@@ -21,7 +21,7 @@
         window.location.href = 'http://' + window.location.host
     }
 </script>
-<body onload="drawNewUsersChart()">
+<body onload="drawAdminCharts()">
 <header>
     <div class="logo">
         <a th:href="'/' + ${user.position.name}"><img src="/img/logo.png"></a>
@@ -60,5 +60,16 @@
 
 <script src="/js/main.js"></script>
 <script src="/js/chart.js"></script>
+<script th:inline="javascript">
+    var success = /*[[${success}]]*/ null;
+    if (success) {
+        showSuccessPopup(success);
+    }
+
+    var error = /*[[${error}]]*/ null;
+    if (error) {
+        showErrorPopup(error);
+    }
+</script>
 </body>
 </html>
