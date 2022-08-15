@@ -49,9 +49,9 @@ function getCookie(name) {
     if (parts.length === 2) return parts.pop().split(';').shift();
 }
 
-function tableSearch() {
+function tableSearch(tableId) {
     var phrase = document.getElementById('search-text');
-    var table = document.getElementById('users-table');
+    var table = document.getElementById(tableId);
     var regPhrase = new RegExp(phrase.value, 'i');
     var flag = false;
 

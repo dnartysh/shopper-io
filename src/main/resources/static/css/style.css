@@ -898,7 +898,7 @@ label {
     visibility: hidden;
 }
 
-.user-content {
+.content {
     width: 100%;
     min-height: 35%;
     margin-top: 1.8%;
@@ -908,14 +908,14 @@ label {
     align-items: center;
 }
 
-.wrap-user-content {
+.wrap-content {
     min-width: 70%;
     max-width: 80%;
     border-radius: 16px;
     /*box-shadow: 1px 20px 40px #777;*/
 }
 
-.wrap-users-table {
+.wrap-table {
     background: white;
     padding: 20px;
     border-radius: 14px;
@@ -926,7 +926,7 @@ label {
     height: 36px;
 }
 
-.table-user-caption {
+.table-caption {
     display: flex;
     flex-direction: row;
     justify-content: space-between;

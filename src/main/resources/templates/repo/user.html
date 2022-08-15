@@ -46,15 +46,15 @@
         </nav>
     </div>
 </header>
-<div class="user-content">
-    <div class="wrap-user-content">
-        <div class="wrap-users-table">
+<div class="content">
+    <div class="wrap-content">
+        <div class="wrap-table">
             <table id="users-table">
                 <caption>
-                    <div class="table-user-caption">
+                    <div class="table-caption">
                         <h1 class="m-t-5 m-l-5">Список пользователей</h1>
                         <input id="search-text" class="max-w-30" placeholder="Поиск" type="text"
-                               onkeyup="tableSearch()"/>
+                               onkeyup="tableSearch('users-table')"/>
                         <label class="button-yellow button-table" for="popup"
                                onclick="clearUserFields()">Добавить</label>
                     </div>
@@ -115,19 +115,19 @@
             </div>
             <div>
                 <form class="m-l-30" id="save-user" method="post" action="/admin/user">
-                    <input required id="username" type="text" name="username" placeholder="Логин">
-                    <input required id="firstname" type="text" name="firstname" placeholder="Имя">
-                    <input required id="lastname" type="text" name="lastname" placeholder="Фамилия">
+                    <input required id="user-name" type="text" name="username" placeholder="Логин">
+                    <input required id="user-firstname" type="text" name="firstname" placeholder="Имя">
+                    <input required id="user-lastname" type="text" name="lastname" placeholder="Фамилия">
                     <input id="new-pass" type="password" name="password" placeholder="Новый пароль">
                     <input id="new-pass-checked" type="password" placeholder="Повторите пароль">
-                    <select id="position" name="position">
+                    <select id="user-position" name="position">
                         <option th:each="position : ${positions}"
                                 th:value="${position.name}"
                                 th:text="${position.description}">
                         </option>
                     </select>
-                    <input id="birthdate" type="date" name="birthdate" placeholder="Дата рождения">
-                    <input id="active" type="checkbox" name="active" placeholder="Включен">
+                    <input id="user-birthdate" type="date" name="birthdate" placeholder="Дата рождения">
+                    <input id="user-active" type="checkbox" name="active" placeholder="Включен">
                     <input id="new-user-checkbox" type="checkbox" value="true" name="isNew">
                 </form>
             </div>

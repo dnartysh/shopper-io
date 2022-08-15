@@ -14,7 +14,6 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Table(name = "orders")
 public class Order {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;

@@ -5,19 +5,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import ru.shopper.service.SellerService;
 import ru.shopper.service.UserService;
 
 @Controller
 @RequestMapping("/seller")
 public class SellerController {
     UserService userService;
-    SellerService sellerService;
 
     @Autowired
-    public SellerController(UserService userService, SellerService sellerService) {
+    public SellerController(UserService userService) {
         this.userService = userService;
-        this.sellerService = sellerService;
     }
 
     @GetMapping

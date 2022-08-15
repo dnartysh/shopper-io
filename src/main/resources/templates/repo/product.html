@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css"/>
     <link rel="stylesheet" href="/css/util.css" media="screen" type="text/css"/>
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <script th:inline="javascript">
     var firstLogin = /*[[${user.firstLogin}]]*/ null;
@@ -43,7 +44,108 @@
         </nav>
     </div>
 </header>
+<input type="checkbox" id="popup"/>
+<input type="checkbox" id="warning-popup">
+<label for="popup" class="popup-bg"></label>
+<label for="warning-popup" class="warning-popup-bg"></label>
+
+<div class="content">
+    <div class="wrap-content">
+        <div class="wrap-table">
+            <table id="products-table">
+                <caption>
+                    <div class="table-caption">
+                        <h1 class="m-t-5 m-l-5">Список товаров</h1>
+                        <input id="search-text" class="max-w-30" placeholder="Поиск" type="text"
+                               onkeyup="tableSearch('products-table')"/>
+                        <label class="button-yellow button-table" for="popup"
+                               onclick="clearProductFields()">Добавить</label>
+                    </div>
+                </caption>
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Наименование</th>
+                    <th>Цена</th>
+                    <th>Вес</th>
+                    <th>Описание</th>
+                    <th>Изменить</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <div th:each="product : ${products}">
+                    <tr>
+                        <td th:text="${product.id}"></td>
+                        <td th:text="${product.name}"></td>
+                        <td th:text="${product.price}"></td>
+                        <td th:text="${product.weight}"></td>
+                        <td th:text="${product.description}"></td>
+                        <td><a href="#" onclick="fillProductFields()"><label for="popup">Изменить</label></a></td>
+                    </tr>
+                </div>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="popup-content">
+    <article class="popup-header">
+        <p id="popup-header-text" class="p-modal m-b-15"></p>
+    </article>
+
+    <article class="popup-body">
+        <div class="info flex-row">
+            <div>
+                <h1>Наименование: </h1>
+                <h1>Цена: </h1>
+                <h1>Вес: </h1>
+                <h1>Описание: </h1>
+            </div>
+            <div>
+                <form class="m-l-30" id="save-product" method="post" action="/manager/product">
+                    <input id="product-name" type="text" name="name" placeholder="Наименование">
+                    <input id="product-price" type="text" name="price" placeholder="Цена">
+                    <input id="product-weight" type="text" name="weight" placeholder="Вес">
+                    <input id="product-description" type="text" name="description" placeholder="Описание">
+                </form>
+            </div>
+        </div>
+    </article>
+
+    <footer>
+        <label class="button success" for="save-product" onclick="checkName() ?
+        submitData('save-product') : showErrorPopup('Не заполнено наименование!')">Сохранить</label>
+        <label class="button close" for="popup">Закрыть</label>
+    </footer>
+</div>
+<div class="warning-content">
+    <div class="warning-popup-body">
+        <img id="warning-popup-body-img" class="p-modal">
+        <article class="popup-body">
+            <p id="warning-popup-body-message" class="p-modal"></p>
+        </article>
+    </div>
+    <footer>
+        <label for="warning-popup" class="button close">Закрыть</label>
+    </footer>
+</div>
 
 <script src="/js/main.js"></script>
+<script src="/js/popup.js"></script>
+<script src="/js/product.js"></script>
+<script src="/js/security.js"></script>
+<script th:inline="javascript">
+    var success = /*[[${success}]]*/ null;
+    if (success) {
+        showSuccessPopup(success);
+    }
+
+    var error = /*[[${error}]]*/ null;
+    if (error) {
+        showErrorPopup(error);
+    }
+</script>
 </body>
 </html>
