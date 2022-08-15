@@ -29,4 +29,7 @@ public class Product {
 
     @ManyToMany(mappedBy = "products", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Shop> shops;
+
+    @OneToMany(mappedBy = "product", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<Order> orders;
 }

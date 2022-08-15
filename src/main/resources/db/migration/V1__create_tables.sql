@@ -86,6 +86,13 @@ create table user_positions
     position_id int
 );
 
+create table orders
+(
+    id int primary key not null auto_increment,
+    product_id int not null,
+    count int
+);
+
 alter table user_roles add foreign key (user_id) references users(id);
 alter table user_roles add foreign key (role_id) references roles(id);
 alter table user_positions add foreign key (user_id) references users(id);

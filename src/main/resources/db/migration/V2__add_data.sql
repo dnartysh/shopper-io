@@ -52,3 +52,10 @@ insert into shopper.user_positions (id, user_id, position_id) values
 (2, 2, 1),
 (3, 3, 3),
 (4, 4, 2);
+
+insert into shopper.orders (id, product_id, count) values
+(1, 1, 3),
+(2, 2, 6),
+(3, 3, 5),
+(4, 4, 3),
+(5, 5, 2);
