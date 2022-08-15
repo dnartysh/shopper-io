@@ -93,6 +93,13 @@ create table orders
     count int
 );
 
+create table locations
+(
+    id int primary key not null auto_increment,
+    user_id int not null,
+    ip_address varchar(15)
+);
+
 alter table user_roles add foreign key (user_id) references users(id);
 alter table user_roles add foreign key (role_id) references roles(id);
 alter table user_positions add foreign key (user_id) references users(id);
