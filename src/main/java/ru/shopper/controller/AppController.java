@@ -42,6 +42,7 @@ public class AppController {
     @GetMapping("/welcome")
     public String welcomePage(Model model) {
         userService.addBasicAttributes(model);
+        model.addAttribute("location", userService.getLastCurrentUserLocation());
 
         return "pre/welcome";
     }

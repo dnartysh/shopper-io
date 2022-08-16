@@ -34,12 +34,12 @@ insert into shopper.shop_products (id, shop_id, product_id, count) values
 (2, 2, 4, 3);
 
 insert into shopper.users (id, username, password, firstname, lastname, image_path, birthdate,
-                           registration_date, last_visit, first_login, active, position_id, ip_address) values
-(1, 'admin', '$2a$10$sz8RiT4cOhGZy17iDCrSpejNyNcC2OH6Rk/jNj24OQD0tmkOM8mE.', 'Denis', 'Ivanov', null, '1993-01-01', '2022-01-01', null, 1, 1, 4, null),
-(2, 'seller', '$2a$10$sz8RiT4cOhGZy17iDCrSpejNyNcC2OH6Rk/jNj24OQD0tmkOM8mE.', 'Masha', 'Petrova', null, null, '2022-02-12', null, 1, 1, 1, null),
-(3, 'storekeeper', '$2a$10$sz8RiT4cOhGZy17iDCrSpejNyNcC2OH6Rk/jNj24OQD0tmkOM8mE.', 'Petya', 'Smirnov', null, '1995-05-09', '2021-08-22', null, 1, 1, 3, null),
-(4, 'manager', '$2a$10$sz8RiT4cOhGZy17iDCrSpejNyNcC2OH6Rk/jNj24OQD0tmkOM8mE.', 'Victoria', 'Vasileva', null, null, '2021-08-22', null, 1, 1, 2, null),
-(5, 'newcomer', '$2a$10$sz8RiT4cOhGZy17iDCrSpejNyNcC2OH6Rk/jNj24OQD0tmkOM8mE.', 'Petr', 'Yashin', null, null, '2021-03-21', null, 1, 1, 5, null);
+                           registration_date, first_login, active, position_id) values
+(1, 'admin', '$2a$10$sz8RiT4cOhGZy17iDCrSpejNyNcC2OH6Rk/jNj24OQD0tmkOM8mE.', 'Denis', 'Ivanov', null, '1993-01-01', '2022-01-01', 1, 1, 4),
+(2, 'seller', '$2a$10$sz8RiT4cOhGZy17iDCrSpejNyNcC2OH6Rk/jNj24OQD0tmkOM8mE.', 'Masha', 'Petrova', null, null, '2022-02-12', 1, 1, 1),
+(3, 'storekeeper', '$2a$10$sz8RiT4cOhGZy17iDCrSpejNyNcC2OH6Rk/jNj24OQD0tmkOM8mE.', 'Petya', 'Smirnov', null, '1995-05-09', '2021-08-22', 1, 1, 3),
+(4, 'manager', '$2a$10$sz8RiT4cOhGZy17iDCrSpejNyNcC2OH6Rk/jNj24OQD0tmkOM8mE.', 'Victoria', 'Vasileva', null, null, '2021-08-22', 1, 1, 2),
+(5, 'newcomer', '$2a$10$sz8RiT4cOhGZy17iDCrSpejNyNcC2OH6Rk/jNj24OQD0tmkOM8mE.', 'Petr', 'Yashin', null, null, '2021-03-21', 1, 1, 5);
 
 insert into shopper.user_roles (id, user_id, role_id) values
 (1, 1, 1),

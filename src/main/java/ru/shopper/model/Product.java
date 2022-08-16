@@ -24,12 +24,12 @@ public class Product {
     private Double weight;
     private String description;
 
-    @ManyToMany(mappedBy = "products", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "products", cascade = CascadeType.ALL)
     private List<Storage> storages;
 
-    @ManyToMany(mappedBy = "products", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "products", cascade = CascadeType.ALL)
     private List<Shop> shops;
 
-    @OneToMany(mappedBy = "product", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private List<Order> orders;
 }

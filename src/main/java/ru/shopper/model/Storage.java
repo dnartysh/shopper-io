@@ -24,7 +24,7 @@ public class Storage {
     private String description;
     private Double capacity;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "storage_products", joinColumns = @JoinColumn(name = "storage_id"),
             inverseJoinColumns = @JoinColumn(name = "product_id"))
     private List<Product> products;

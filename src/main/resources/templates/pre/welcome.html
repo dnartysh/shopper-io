@@ -44,8 +44,9 @@
                 </div>
                 <div th:case="*">
                     <span class="fs-18 m-b-40" th:text="'Последний вход в систему был осуществлен ' +
-                    ${#temporals.format(user.lastVisit, 'dd.MM.yyyy в HH:mm')} +
-' (IP: ' + ${user.ipAddress} + ')'"></span>
+                    ${#temporals.format(location.dateTime, 'dd.MM.yyyy в HH:mm')} +
+' (IP: ' + ${location.ipAddress} + ')'"></span>
+
                     <div class="p-l-50 p-r-50 m-t-40 flex">
                         <a th:href="'/' + ${user.position.name}" class="button-yellow fs-18">Начать работу</a>
                     </div>

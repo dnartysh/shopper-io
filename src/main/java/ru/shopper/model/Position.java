@@ -23,6 +23,6 @@ public class Position {
 
     private String description;
 
-    @OneToMany(mappedBy = "position", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "position", cascade = CascadeType.ALL)
     private List<User> users;
 }

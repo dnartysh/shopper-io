@@ -8,11 +8,9 @@ create table users
     image_path varchar(255),
     birthdate date,
     registration_date date not null,
-    last_visit datetime,
     first_login boolean,
     active boolean,
-    position_id int not null,
-    ip_address varchar(15)
+    position_id int not null
 );
 
 create table roles
@@ -97,6 +95,7 @@ create table locations
 (
     id int primary key not null auto_increment,
     user_id int not null,
+    datetime datetime,
     ip_address varchar(15)
 );
 

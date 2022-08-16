@@ -10,9 +10,11 @@ import org.springframework.web.multipart.MultipartFile;
 import ru.shopper.config.AppConstants;
 import ru.shopper.exception.PositionNotFoundException;
 import ru.shopper.exception.UserNotFoundException;
+import ru.shopper.model.Location;
 import ru.shopper.model.Position;
 import ru.shopper.model.Role;
 import ru.shopper.model.User;
+import ru.shopper.repository.LocationRepository;
 import ru.shopper.repository.PositionRepository;
 import ru.shopper.repository.RoleRepository;
 import ru.shopper.repository.UserRepository;
@@ -22,7 +24,6 @@ import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -32,6 +33,7 @@ public class UserService {
     UserRepository userRepository;
     RoleRepository roleRepository;
     PositionRepository positionRepository;
+    LocationRepository locationRepository;
 
     @Value("${shopper.user-img-path}")
     private String userImgPath;
@@ -42,10 +44,12 @@ public class UserService {
     @Autowired
     public UserService(UserRepository userRepository,
                        RoleRepository roleRepository,
-                       PositionRepository positionRepository) {
+                       PositionRepository positionRepository,
+                       LocationRepository locationRepository) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.positionRepository = positionRepository;
+        this.locationRepository = locationRepository;
     }
 
     public User getUserByUsername(String username) {
@@ -157,7 +161,6 @@ public class UserService {
 
         if (user.isFirstLogin()) {
             user.setFirstLogin(false);
-            user.setLastVisit(LocalDateTime.now());
         }
 
         if (!"".equals(password)) {
@@ -215,5 +218,11 @@ public class UserService {
 
     public void addBasicAttributes(Model model) {
         model.addAttribute("user", getCurrentUser());
+    }
+
+    public Location getLastCurrentUserLocation() {
+        User currentUser = getCurrentUser();
+
+        return locationRepository.findLastLocationByUserId(currentUser.getId());
     }
 }
