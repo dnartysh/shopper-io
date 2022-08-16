@@ -28,6 +28,7 @@ public class AppController {
     @GetMapping("/")
     public String redirectToPage(Model model) {
         userService.addBasicAttributes(model);
+        model.addAttribute("location", userService.getLastCurrentUserLocation());
 
         return "pre/welcome";
     }
@@ -35,6 +36,7 @@ public class AppController {
     @GetMapping
     public String redirectToMainPage(Model model) {
         userService.addBasicAttributes(model);
+        model.addAttribute("location", userService.getLastCurrentUserLocation());
 
         return "pre/welcome";
     }
@@ -52,6 +54,7 @@ public class AppController {
                                   @RequestParam String password) {
         userService.addBasicAttributes(model);
         userService.updateCurrentUser(password);
+        model.addAttribute("location", userService.getLastCurrentUserLocation());
 
         return "pre/welcome";
     }

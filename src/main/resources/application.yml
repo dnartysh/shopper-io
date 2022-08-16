@@ -11,7 +11,7 @@ spring:
   main:
     allow-circular-references: true
   jpa:
-    show-sql: false
+    show-sql: true
     hibernate:
       ddl-auto: validate
   servlet:
